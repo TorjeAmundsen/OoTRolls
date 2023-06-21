@@ -20,6 +20,10 @@ class Link:
         (202.875, 21)  # 21 frames total, 9 frames spacing
     ]
 
+    from_standstill_child = [(0, 3, 6, 8.25, 8.25,   8.25,  8.25,   8.25,   8.25,   8.25,   8.25,   8.25),
+                             (0, 3, 6,    9,   12, 12.375, 12.375, 12.375, 12.375, 12.375, 12.375, 12.375),
+                             (0, 0, 3,    6,    9,   12, 12.375, 12.375, 12.375, 12.375, 12.375, 12.375, 12.375),
+                             (0, 3, 3, 6, 9, 12, )]
     rolls_dist_matrix = [
         [0 for x in range(10)] for y in range(10)
     ]
@@ -37,6 +41,8 @@ class Link:
     ]
 
     def __init__(self, age, start_coord, end_coord):
+        self.start = start_coord
+        self.end = end_coord
         self.age = age
         self.distance = self.calculate_distance(start_coord, end_coord)
     
@@ -71,7 +77,7 @@ class Link:
                 if self.rolls_dist_matrix[i][j] >= remainder:
                     self.memo_time[i][j] = self.rolls_time_matrix[i][j]
                     time_list_1D.append(self.memo_time[i][j])
-#                    print(time_list_1D)
+                    print(time_list_1D)
 
         lowest_time = min(time_list_1D)
         
@@ -81,17 +87,22 @@ class Link:
                 if value == lowest_time:
                     self.memo_dist[i][j] = self.rolls_dist_matrix[i][j]
                     dist_list_1D.append(self.memo_dist[i][j])
-#                    print(dist_list_1D)
+                    print(dist_list_1D)
 
         highest_dist = max(dist_list_1D)
-
+        lowest_dist = min(dist_list_1D)
         print(f"Highest distance: {highest_dist}")
         for i, row in enumerate(self.memo_dist):
             for j, value in enumerate(row):
                 if value == highest_dist:
-                    self.best_rolls = [i, j]
                     print(f"Do {good_rolls} good rolls, then space the next rolls by {i} frames then {j} frames.")
-
+        if lowest_dist != highest_dist:
+            for i, row in enumerate(self.memo_dist):
+                for j, value in enumerate(row):
+                    if value == lowest_dist:
+                        print(f"To avoid bonking, do {good_rolls} good rolls, then space the next rolls by {i} frames then {j} frames.")
+            print(f"All of these combinations travel your desired distance in {lowest_time} frames.\nDo the first option(s) if you want to cover as much distance as possible in those {lowest_time} frames.\nDo the second option(s) if you want to avoid bonking on something in front of you.")
+        print(f"Finished calculating optimal rolls from {self.start} to {self.end} (distance: {self.distance:.2f}).")
     def calculate(self):
         self.roll_combos()
         if self.age == "child":
