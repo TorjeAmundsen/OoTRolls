@@ -1,5 +1,7 @@
 from link import Link
 
-calc = Link("child", [1500, -173.602], [249.335, -183.5])
+#9f spacing roll example: [955.5, -1091.86], [1500.86, -693.457]
 
-calc.calculate()
+rollcalc = Link("child", [1196.5, -1091.86], [1500.86, -693.457])
+
+rollcalc.calculate(True)
