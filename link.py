@@ -1,9 +1,7 @@
 import math
 
-# Test whatever 123
-
 class Link:
-    age: str = None
+    is_adult: bool = None
     distance: float = 0
     roll_distances_adult = [
         (132.0, 12), # 12 frames total, 0 frames spacing
@@ -32,15 +30,15 @@ class Link:
     ]
 # (0, 3, 6, 8.25, 8.25,   8.25,   8.25,   8.25,   8.25,   8.25,   8.25,   8.25) walking data
     from_standstill_child = [
-                             (116.625, 12), # 0 frames of walking roll 12f
-                             (116.625, 13), # 1 frame  of walking roll 13f
-                             (132.000, 14), # 2 frames of walking roll 14f
-                             (147.375, 15), # 3 frames of walking roll 15f
-                             (160.500, 16), # 4 frames of walking roll 16f
-                             (168.750, 17), # 5 frames of walking roll 17f
-                             (177.000, 18), # 6 frames of walking roll 18f
-                             (185.250, 18), # 7 frames of walking roll 19f
-                             (193.500, 18)  # 8 frames of walking roll 20f
+        (116.625, 12), # 0 frames of walking roll 12f
+        (116.625, 13), # 1 frame  of walking roll 13f
+        (132.000, 14), # 2 frames of walking roll 14f
+        (147.375, 15), # 3 frames of walking roll 15f
+        (160.500, 16), # 4 frames of walking roll 16f
+        (168.750, 17), # 5 frames of walking roll 17f
+        (177.000, 18), # 6 frames of walking roll 18f
+        (185.250, 18), # 7 frames of walking roll 19f
+        (193.500, 18)  # 8 frames of walking roll 20f
     ] 
     rolls_dist_matrix = [
         [0 for x in range(10)] for y in range(10)
@@ -58,21 +56,30 @@ class Link:
         [None for x in range(10)] for y in range(10)
     ]
 
-    def __init__(self, age: str, start_coord: list, end_coord: list, threshold=0):
+    def __init__(self, start_coord: list, end_coord: list, is_adult: bool = False, threshold=0):
         self.start = start_coord
         self.end = end_coord
-        self.age = age
+        self.is_adult = is_adult
         self.distance = self.calculate_distance(start_coord, end_coord)
         self.threshold = threshold
     
     def roll_combos(self):
-        for i, row in enumerate(self.rolls_dist_matrix):
-            for j, value in enumerate(row):
-                self.rolls_dist_matrix[i][j] = self.roll_distances_child[i][0] + self.roll_distances_child[j][0]
+        if not self.is_adult:
+            for i, row in enumerate(self.rolls_dist_matrix):
+                for j, value in enumerate(row):
+                    self.rolls_dist_matrix[i][j] = self.roll_distances_child[i][0] + self.roll_distances_child[j][0]
                 
-        for i, row in enumerate(self.rolls_time_matrix):
-            for j, value in enumerate(row):
-                self.rolls_time_matrix[i][j] = self.roll_distances_child[i][1] + self.roll_distances_child[j][1]
+            for i, row in enumerate(self.rolls_time_matrix):
+                for j, value in enumerate(row):
+                    self.rolls_time_matrix[i][j] = self.roll_distances_child[i][1] + self.roll_distances_child[j][1]
+        elif self.is_adult:
+            for i, row in enumerate(self.rolls_dist_matrix):
+                for j, value in enumerate(row):
+                    self.rolls_dist_matrix[i][j] = self.roll_distances_adult[i][0] + self.roll_distances_adult[j][0]
+                
+            for i, row in enumerate(self.rolls_time_matrix):
+                for j, value in enumerate(row):
+                    self.rolls_time_matrix[i][j] = self.roll_distances_adult[i][1] + self.roll_distances_adult[j][1]
                 
         
     def calculate_distance(self, start_coord, end_coord):
@@ -142,6 +149,6 @@ class Link:
             traversed_low = current_roll * good_rolls + lowest_dist - (current_roll - standstill_roll)
         print(f"Finished calculating optimal rolls from {self.start} to {self.end}. Distance to cover: {self.distance:.2f}. Highest distance covered: {traversed_high}. Lowest distance covered: {traversed_low}")
     def calculate(self, from_standstill: bool = True):
-        self.roll_combos()
+        self.roll_combos(self.age)
         if self.age == "child":
             self.child_recursion(self.distance, from_standstill)
