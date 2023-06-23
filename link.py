@@ -56,11 +56,11 @@ class Link:
         [None for x in range(10)] for y in range(10)
     ]
 
-    def __init__(self, start_coord: list, end_coord: list, is_adult: bool = False, threshold=0):
-        self.start = start_coord
-        self.end = end_coord
+    def __init__(self, is_adult: bool, start_coord_1: str, start_coord_2: str, end_coord_1: str, end_coord_2: str, threshold=0):
+        self.start = [float(start_coord_1), float(start_coord_2)]
+        self.end = [float(end_coord_1), float(end_coord_2)]
         self.is_adult = is_adult
-        self.distance = self.calculate_distance(start_coord, end_coord)
+        self.distance = self.calculate_distance(self.start, self.end)
         self.threshold = threshold
     
     def roll_combos(self):
@@ -149,6 +149,6 @@ class Link:
             traversed_low = current_roll * good_rolls + lowest_dist - (current_roll - standstill_roll)
         print(f"Finished calculating optimal rolls from {self.start} to {self.end}. Distance to cover: {self.distance:.2f}. Highest distance covered: {traversed_high}. Lowest distance covered: {traversed_low}")
     def calculate(self, from_standstill: bool = True):
-        self.roll_combos(self.age)
-        if self.age == "child":
+        self.roll_combos()
+        if not self.is_adult:
             self.child_recursion(self.distance, from_standstill)
