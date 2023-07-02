@@ -81,12 +81,12 @@ class Link:
                 for j, value in enumerate(row):
                     self.rolls_time_matrix[i][j] = self.roll_distances_adult[i][1] + self.roll_distances_adult[j][1]
                 
-        
+
     def calculate_distance(self, start_coord, end_coord):
-        self.distance = math.sqrt(((start_coord[0]-end_coord[0])**2) + ((start_coord[1]-end_coord[1])**2))
+        distance = math.sqrt(((start_coord[0]-end_coord[0])**2) + ((start_coord[1]-end_coord[1])**2))
         print(start_coord, end_coord)
         print(f"Distance to cover: {self.distance} units")
-        return self.distance
+        return distance
     
     def child_recursion(self, target_distance, from_standstill: bool = True):
         print(f"From standstill: {from_standstill}")
@@ -113,7 +113,6 @@ class Link:
                         self.memo_time[i][j] = self.rolls_time_matrix[i][j]
                         time_list_1D.append(self.memo_time[i][j])
                     print(time_list_1D)
-#                    print(self.memo_time)
 
         lowest_time = min(time_list_1D)
         
@@ -124,31 +123,35 @@ class Link:
                     self.memo_dist[i][j] = self.rolls_dist_matrix[i][j]
                     dist_list_1D.append(self.memo_dist[i][j])
                     print(dist_list_1D)
-#                    print(self.memo_dist)
+
         if not self.threshold:
             highest_dist = max(dist_list_1D)
-        else:
-            pass
         lowest_dist = min(dist_list_1D)
         print(f"Highest distance: {highest_dist}")
         for i, row in enumerate(self.memo_dist):
             for j, value in enumerate(row):
                 if value == highest_dist:
-                    print(f"Do {good_rolls} good rolls, then space the next rolls by {i} frames then {j} frames.")
+                    roll_combos_str = f"Do {good_rolls} good rolls, then space the next rolls by {i} frames then {j} frames."
         if lowest_dist != highest_dist:
             for i, row in enumerate(self.memo_dist):
                 for j, value in enumerate(row):
                     if value == lowest_dist:
-                        print(f"To avoid bonking, do {good_rolls} good rolls, then space the next rolls by {i} frames then {j} frames.")
-            print(f"All of these combinations travel your desired distance in {lowest_time} frames.\nDo the first option(s) if you want to cover as much distance as possible in those {lowest_time} frames.\nDo the second option(s) if you want to avoid bonking on something in front of you.")
+                        roll_combos_str =  f"""To avoid bonking, do {good_rolls} good rolls, then space the next rolls by {i} frames then {j} frames.
+All of these combinations travel your desired distance in {lowest_time} frames.
+Do the first option(s) if you want to cover as much distance as possible in those {lowest_time} frames.
+Do the second option(s) if you want to avoid bonking on something in front of you."""
         if not from_standstill:
             traversed_high = current_roll * good_rolls + highest_dist
             traversed_low = current_roll * good_rolls + lowest_dist
         else:
             traversed_high = current_roll * good_rolls + highest_dist - (current_roll - standstill_roll)
             traversed_low = current_roll * good_rolls + lowest_dist - (current_roll - standstill_roll)
-        print(f"Finished calculating optimal rolls from {self.start} to {self.end}. Distance to cover: {self.distance:.2f}. Highest distance covered: {traversed_high}. Lowest distance covered: {traversed_low}")
+        distances_travelled = f"Finished calculating optimal rolls from {self.start} to {self.end}. Distance to cover: {self.distance:.2f}. Highest distance covered: {traversed_high}. Lowest distance covered: {traversed_low}"
+        combined_str = f"{roll_combos_str}\n{distances_travelled}"
+        print(combined_str)
+        print(self.distance)
+        return combined_str
     def calculate(self, from_standstill: bool = True):
         self.roll_combos()
         if not self.is_adult:
-            self.child_recursion(self.distance, from_standstill)
+            return self.child_recursion(self.distance, from_standstill)

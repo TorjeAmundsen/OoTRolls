@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Coordinate Form</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='form/form.css')}}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Coordinate Form</h2>
+        <form id="coordinate-form">
+          <div class="coordinate-separator"
+            <div class="starting-coordinates">
+              <div class="form-group">
+                <label for="X1">X1:</label>
+                <input type="text" id="X1" name="X1" required>
+              </div>
+              <div class="form-group">
+                <label for="Z1">Z1:</label>
+                <input type="text" id="Z1" name="Z1" required>
+              </div>
+            </div>
+            <div class="ending-coordinates">
+              <div class="form-group">
+                <label for="X2">X2:</label>
+                <input type="text" id="X2" name="X2" required>
+              </div>
+              <div class="form-group">
+                <label for="Z2">Z2:</label>
+                <input type="text" id="Z2" name="Z2" required>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="age">Age:</label>
+            <select id="age" name="age">
+              <option value="child">Child</option>
+              <option value="adult">Adult</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input type="checkbox" id="standstill" name="standstill">
+            <label for="standstill">Standstill</label>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <script type="text/javascript" src="{{ url_for('static', filename='form/form.js')}}"></script>
+</body>
+</html>
