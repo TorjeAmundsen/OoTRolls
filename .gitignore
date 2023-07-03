@@ -1,3 +1,4 @@
 
 *.pyc
 __pycache__/link.cpython-311.pyc
+*.pyc
