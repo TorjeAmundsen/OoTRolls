@@ -1,6 +1,7 @@
 import math
 
 class Link:
+    roll_combo_list: list
     is_adult: bool = None
     distance: float = 0
     roll_distances_adult = [
@@ -89,6 +90,7 @@ class Link:
         return distance
     
     def child_recursion(self, target_distance, from_standstill: bool = True):
+        
         print(f"From standstill: {from_standstill}")
         current_roll = self.roll_distances_child[4][0]
         standstill_roll = self.from_standstill_child[4][0]
@@ -100,6 +102,8 @@ class Link:
         if remainder > self.rolls_dist_matrix[9][9]:
             remainder -= current_roll
             good_rolls += 1
+        self.roll_combo_list = [4 for x in range(good_rolls)]
+        print("Initial rolls combo: ", self.roll_combo_list)
         print(f"Remainder distance: {remainder}")
         time_list_1D = []
         dist_list_1D = []
@@ -112,7 +116,7 @@ class Link:
                     elif not time_list_1D:
                         self.memo_time[i][j] = self.rolls_time_matrix[i][j]
                         time_list_1D.append(self.memo_time[i][j])
-                    print(time_list_1D)
+                    #print(time_list_1D)
 
         lowest_time = min(time_list_1D)
         
@@ -122,7 +126,7 @@ class Link:
                 if value == lowest_time:
                     self.memo_dist[i][j] = self.rolls_dist_matrix[i][j]
                     dist_list_1D.append(self.memo_dist[i][j])
-                    print(dist_list_1D)
+                    #print(dist_list_1D)
 
         if not self.threshold:
             highest_dist = max(dist_list_1D)
@@ -132,14 +136,43 @@ class Link:
             for j, value in enumerate(row):
                 if value == highest_dist:
                     roll_combos_str = f"Do {good_rolls} good rolls, then space the next rolls by {i} frames then {j} frames."
+                    if len(self.roll_combo_list) == good_rolls:
+                        self.roll_combo_list.append(j)
+                        self.roll_combo_list.append(i)
+                    temp_list = [i, j]
+                    closes_to_4_index = temp_list.index(min(temp_list, key=lambda x:abs(x-4)))
+                    print("Closest to 4: ", closes_to_4_index)
+                    if closes_to_4_index == 1:
+                        self.roll_combo_list[good_rolls] = j
+                        self.roll_combo_list[good_rolls+1] = i
+                    elif closes_to_4_index == 0:
+                        self.roll_combo_list[good_rolls] = i
+                        self.roll_combo_list[good_rolls+1] = j
+                    print("Combo list: ", self.roll_combo_list)
+
         if lowest_dist != highest_dist:
             for i, row in enumerate(self.memo_dist):
                 for j, value in enumerate(row):
                     if value == lowest_dist:
-                        roll_combos_str =  f"""To avoid bonking, do {good_rolls} good rolls, then space the next rolls by {i} frames then {j} frames.
-All of these combinations travel your desired distance in {lowest_time} frames.
-Do the first option(s) if you want to cover as much distance as possible in those {lowest_time} frames.
-Do the second option(s) if you want to avoid bonking on something in front of you."""
+                        roll_combos_str =  f"""To avoid bonking, do {good_rolls} good rolls, then space the next rolls by {i} frames then {j} frames.\n
+\nAll of these combinations travel your desired distance in {lowest_time} frames.
+\nDo the first option(s) if you want to cover as much distance as possible in those {lowest_time} frames.
+\nDo the second option(s) if you want to avoid bonking on something in front of you."""
+                        if len(self.roll_combo_list) == good_rolls:
+                            self.roll_combo_list.append(j)
+                            self.roll_combo_list.append(i)
+                        temp_list = [i, j]
+                        closes_to_4_index = temp_list.index(min(temp_list, key=lambda x:abs(x-4)))
+                        print("Closest to 4: ", closes_to_4_index)
+                        if closes_to_4_index == 1:
+                            self.roll_combo_list[good_rolls] = j
+                            self.roll_combo_list[good_rolls+1] = i
+                        elif closes_to_4_index == 0:
+                            self.roll_combo_list[good_rolls] = i
+                            self.roll_combo_list[good_rolls+1] = j
+                        print("Combo list: ", self.roll_combo_list)
+                        
+                        
         if not from_standstill:
             traversed_high = current_roll * good_rolls + highest_dist
             traversed_low = current_roll * good_rolls + lowest_dist
@@ -150,6 +183,7 @@ Do the second option(s) if you want to avoid bonking on something in front of yo
         combined_str = f"{roll_combos_str}\n{distances_travelled}"
         print(combined_str)
         print(self.distance)
+        print(self.roll_combo_list)
         return combined_str
     def calculate(self, from_standstill: bool = True):
         self.roll_combos()
