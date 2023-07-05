@@ -3,23 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='form/form.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='calc/calc.css')}}">
 </head>
 <body>
-    <h1>Results</h1>
-    <div>
+    <div id="data" data-rollcombo="{{ roll_combo|tojson }}" data-allcombos="{{ all_combos|tojson }}"></div>
+    <h1>Calculation</h1>
+    <div class="start-end">
         Start coordinates:
         {{ start_coords }}
         End coordinates:
         {{ end_coords }}
     </div>
-    <div>
-        Distance:
-        {{ total_distance }}
+    <div class="distance">
+        Distance: {{ total_distance }}
     </div>
-    <div>
+    <div class="results">
         Result:
-        {{ combined_str }}
+        <div id="roll-combo">
+            {{ roll_combo }}
+        </div>
+        <div id="all-combos">
+            {{ all_combos}}
+        </div>
     </div>
+    <canvas id="canvas"></canvas>
+    <script type="text/javascript" src="{{ url_for('static', filename='calc/calc.js')}}"></script>
 </body>
 </html>

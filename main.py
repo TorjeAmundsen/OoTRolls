@@ -31,10 +31,10 @@ def calc():
         else:
             is_adult = True
         link = Link(is_adult, x1, z1, x2, z2)
-        combined_str = link.calculate(standstill)
+        roll_combo, all_combos = link.calculate(standstill)
         distance = f"{link.distance: .3f}"
         print(f"Distance returned: {distance}")
-        return render_template("calc.html", start_coords=link.start, end_coords=link.end, total_distance=distance, combined_str=combined_str)
+        return render_template("calc.html", start_coords=link.start, end_coords=link.end, total_distance=distance, roll_combo=roll_combo, all_combos=all_combos)
     else:
         print("error")
 

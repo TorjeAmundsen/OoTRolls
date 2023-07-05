@@ -4,3 +4,4 @@ __pycache__/link.cpython-311.pyc
 *.pyc
 *.pyc
 test.py
+*.pyc
