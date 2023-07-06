@@ -34,7 +34,6 @@ const rollDistancesAdult = [
     [223.500, 21]  // 21 frames total, 9 frames spacing
 ];
 
-
 let allPossibleCombos = [];
 
 let rollsDistMatrix = Array(10).fill().map(() => Array(10).fill(0));
@@ -68,6 +67,7 @@ function getDistance(x1, z1, x2, z2) {
 };
 
 function calculateRolls(x1, z1, x2, z2, fromStandstill = true, isAdult = false) {
+    
     let totalDistance = getDistance(x1, z1, x2, z2);
     let timeList1D = [];
     let distList1D = [];
@@ -90,8 +90,14 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill = true, isAdult = false) 
         remainderDistance -= optimalRollDist;
         goodRolls += 1;
     };
+    let initialRollCombo = Array(goodRolls).fill(4);
     let rollComboArray = Array(goodRolls).fill(4);
     console.log(`Initial roll combo: ${rollComboArray}`)
+
+    let initialTraversed = optimalRollDist * goodRolls;
+    let initialTraversedStandstill = optimalRollDist * goodRolls - (optimalRollDist - standstillRollDist);
+    let traversedArray = []
+
     for (let [i, row] of rollsTimeMatrix.entries()) {
         for (let [j, value] of row.entries()) {
             if (rollsDistMatrix[i][j] >= remainderDistance) {
@@ -99,11 +105,91 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill = true, isAdult = false) 
                     memoTime[i][j] = rollsTimeMatrix[i][j];
                     timeList1D.push(memoTime[i][j]);
                 } else if (!(timeList1D.length === 0)) {
-
+                    memoTime[i][j] = rollsTimeMatrix[i][j];
+                    timeList1D.push(memoTime[i][j]);
                 };
             };
         };
     };
+
+    let lowestTime = Math.min(...timeList1D);
+
+    for (let [i, row] of memoTime.entries()) {
+        for (let [j, value] of row.entries()) {
+            if (value == lowestTime) {
+                memoDist[i][j] = rollsDistMatrix[i][j];
+                distList1D.push(memoDist[i][j]);
+            };
+        };
+    };
+
+    let highestDist = Math.max(...distList1D);
+    let lowestDist = Math.min(...distList1D);
+    console.log("Highest dist: ", highestDist);
+    console.log("Lowest dist: ", lowestDist);
+
+    for (let [i, row] of memoDist.entries()) {
+        for (let [j, value] of row.entries()) {
+            if (value == highestDist) {
+                if (rollComboArray.length == goodRolls) {
+                    rollComboArray.push(i, j);
+                } else {
+                    rollComboArray.pop();
+                    rollComboArray.pop();
+                    rollComboArray.push(i, j);
+                };
+                allPossibleCombos.push(JSON.parse(JSON.stringify(rollComboArray)));
+                let sortedRolls = [i, j]
+                sortedRolls.sort((a, b) => Math.abs(4 - a) - Math.abs(4 - b))[0];
+                rollComboArray.pop();
+                rollComboArray.pop();
+                rollComboArray.push(...sortedRolls);
+                currentTraversed = initialTraversed + memoDist[i][j];
+                traversedArray.push(currentTraversed);
+            };
+        };
+    };
+
+    let numLowestDist = 0;
+    let lowestDistComboArray = Array(goodRolls).fill(4);
+
+    if (lowestDist != highestDist) {
+        console.log("Shorter optimal rolls possible.")
+        for (let [i, row] of memoDist.entries()) {
+            for (let [j, value] of row.entries()) {
+                if (value == lowestDist) {
+                    if (lowestDistComboArray.length == goodRolls) {
+                        lowestDistComboArray.push(i, j);
+                    } else {
+                        lowestDistComboArray.pop();
+                        lowestDistComboArray.pop();
+                        lowestDistComboArray.push(i, j);
+                    };
+                    allPossibleCombos.push(JSON.parse(JSON.stringify(lowestDistComboArray)));
+                    let sortedRolls = [i, j]
+                    sortedRolls.sort((a, b) => Math.abs(4 - a) - Math.abs(4 - b))[0];
+                    lowestDistComboArray.pop();
+                    lowestDistComboArray.pop();
+                    lowestDistComboArray.push(...sortedRolls);
+                    console.log("Lowest dist array: ", lowestDistComboArray);
+                    currentTraversed = initialTraversed + memoDist[i][j];
+                    traversedArray.push(currentTraversed);
+                    numLowestDist++;
+                };
+            };
+        };
+    };
+
+    for (let [i, j] of allPossibleCombos.entries()) {
+        if (j[rollComboArray.length - 2] == 4) {
+            rollComboArray = allPossibleCombos[i];
+        };
+    };
+
+    console.log("Roll combo: ", rollComboArray);
+    console.log("All combos: ", allPossibleCombos);
+    console.log("Distances traversed: ", traversedArray);
+    console.log("Lowest distance combos: ", numLowestDist);
 };
 
 calculateRolls(12, 12, 60, 999)
