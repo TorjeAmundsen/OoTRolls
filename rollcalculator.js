@@ -192,4 +192,4 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill = true, isAdult = false) 
     console.log("Lowest distance combos: ", numLowestDist);
 };
 
-calculateRolls(12, 12, 60, 999)
+calculateRolls(12, 12, 60, 500)
