@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/calc/calc.css">
+    <title>OoT Roll Calculator</title>
+</head>
+<body>
+    <form class="form">
+        <div class="all-coordinates">
+            <div class="start">
+                <label for="startX" class="coordinate-label">Start X<sub>1</sub>, Z<sub>1</sub></label>
+                <input type="text" id="startX" class ="coordinate" placeholder="X1...">
+                <input type="text" id="startZ" class ="coordinate" placeholder="Z1...">
+            </div>
+            <div class="end">
+                <label for="endX" class="coordinate-label">End X<sub>2</sub>, Z<sub>2</sub></label>
+                <input type="text" id="endX" class ="coordinate" placeholder="X2...">
+                <input type="text" id="endZ" class ="coordinate" placeholder="Z2...">
+            </div>
+        </div>
+        <div class="age-standstill-submit">
+            <div class="standstill-container">
+                <input type="checkbox" id="standstill" class="standstill">
+                <label for="standstill">From standstill?</label>
+            </div>
+            <div class="age-selector">
+                <label for="age" class="age-label">Age</label>
+                <select class="age" id="age">
+                    <option value=0>Child</option>
+                    <option value=1>Adult</option>
+                </select>
+            </div>
+        </div>
+        <button type="button" id="calculate">Calculate</button>
+    </form>
+    <script type="text/javascript" src="rollcalculator.js"></script>
+</body>
+</html>

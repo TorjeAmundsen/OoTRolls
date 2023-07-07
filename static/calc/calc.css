@@ -1,8 +1,134 @@
 body {
     font-family: Arial, sans-serif;
-    color: #efefef;
+    color: #98c8df;
     background-color: #0d1117;
-    padding: 20px;
+    margin: 1rem;
+    padding: 2rem;
+    font-size: 16px;
+}
+
+::selection{
+    background: #244b7a;
+}
+
+.form {
+    margin: auto;
+    width: 21rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #171d25;
+    background-color: #11171f;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.coordinate {    
+    width: 6rem;
+    height: 1.25rem;
+    margin: 5px;
+    margin-bottom:8px;
+    font-size: 16px;
+    outline-style: solid;
+    outline-width: 2px;
+    border-style: none;
+    border-radius: 6px;
+    outline-color: #1f2b3a;
+    padding: 0.25rem;
+    background-color: #11171f;
+    color: #98c8df;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    transition: 120ms;
+}
+
+.coordinate::placeholder {
+    opacity: 1;
+    color: #3a4452;
+    font-size: 12px;
+}
+
+.coordinate:focus {
+    outline: #314c6d 2px solid;
+    box-shadow: 0px 0px 5px rgb(111, 150, 182);
+    background-color: #161d27;
+}
+
+.all-coordinates label {
+    text-align: left;
+    margin-left: 5px;
+    width: 84px;
+}
+
+.start, .end {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px;
+}
+
+.age-selector select {
+    height: 28px;
+    padding: 4px;
+    margin: 5px;
+    width: 6rem;
+    font-size: 16px;
+    outline-style: solid;
+    outline-width: 2px;
+    border-style: none;
+    border-radius: 6px;
+    outline-color: #1f2b3a;
+    background-color: #11171f;
+    color: #98c8df;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    transition: 120ms;
+}
+
+.age-selector select:hover {
+    outline: #314c6d 2px solid;
+    box-shadow: 0px 0px 5px rgb(111, 150, 182);
+    background-color: #161d27;
+}
+
+.age-selector select:focus {
+    outline: #314c6d 2px solid;
+    box-shadow: 0px 0px 5px rgb(111, 150, 182);
+    background-color: #161d27;
+}
+
+.age-standstill-submit {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px;
+}
+
+input[type="checkbox"] {
+    width: 12px;
+    height: 12px;
+    border-style: none;
+    transition: background-color 0.3s;
+    background-color: #fff;
+}
+
+#calculate {
+    margin: auto;
+    height: 2rem;
+    border: none;
+    border-radius: 6px;
+    outline-style: solid;
+    outline-width: 2px;
+    outline-color: #1f2b3a;
+    transition: 120ms;
+    background-color: #11171f;
+    color: #98c8df;
+}
+
+#calculate:hover {
+    outline: #314c6d 2px solid;
+    box-shadow: 0px 0px 5px rgb(111, 150, 182);
+    background-color: #161d27;
 }
 
 #canvas {

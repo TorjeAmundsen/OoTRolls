@@ -9,6 +9,7 @@ const rollDistancesChildStandstill = [
     [185.250, 18], // 7 frames of walking roll 19f
     [193.500, 18]  // 8 frames of walking roll 20f
 ];
+
 const rollDistancesChild = [
     [118.500, 12], // 12 frames total, 0 frames spacing
     [118.875, 13], // 13 frames total, 1 frame  spacing
@@ -21,6 +22,7 @@ const rollDistancesChild = [
     [194.625, 20], // 20 frames total, 8 frames spacing
     [202.875, 21], // 21 frames total, 9 frames spacing
 ];
+
 const rollDistancesAdult = [
     [132.000, 12], // 12 frames total, 0 frames spacing
     [133.500, 13], // 13 frames total, 1 frame  spacing
@@ -67,7 +69,8 @@ function getDistance(x1, z1, x2, z2) {
 };
 
 function calculateRolls(x1, z1, x2, z2, fromStandstill = true, isAdult = false) {
-    
+    console.log(`Input coordinates: [${x1}, ${z1}] [${x2}, ${z2}]`)
+
     let totalDistance = getDistance(x1, z1, x2, z2);
     let timeList1D = [];
     let distList1D = [];
@@ -76,7 +79,7 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill = true, isAdult = false) 
         optimalRollDist = rollDistancesChild[4][0];
         standstillRollDist = rollDistancesChildStandstill[4][0];
     } else {
-        console.log("Adult standstill data coming, using moving data for now.");
+        console.log("Adult from standstill data coming, using moving data for now.");
         optimalRollDist = rollDistancesAdult[4][0];
         standstillRollDist = optimalRollDist;
     };
@@ -95,7 +98,10 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill = true, isAdult = false) 
     console.log(`Initial roll combo: ${rollComboArray}`)
 
     let initialTraversed = optimalRollDist * goodRolls;
-    let initialTraversedStandstill = optimalRollDist * goodRolls - (optimalRollDist - standstillRollDist);
+    if (fromStandstill) {
+        initialTraversed = optimalRollDist * goodRolls - (optimalRollDist - standstillRollDist);
+    };
+
     let traversedArray = []
 
     for (let [i, row] of rollsTimeMatrix.entries()) {
@@ -125,8 +131,8 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill = true, isAdult = false) 
 
     let highestDist = Math.max(...distList1D);
     let lowestDist = Math.min(...distList1D);
-    console.log("Highest dist: ", highestDist);
-    console.log("Lowest dist: ", lowestDist);
+    console.log("Highest remainder dist: ", highestDist);
+    console.log("Lowest remainder dist: ", lowestDist);
 
     for (let [i, row] of memoDist.entries()) {
         for (let [j, value] of row.entries()) {
@@ -171,7 +177,6 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill = true, isAdult = false) 
                     lowestDistComboArray.pop();
                     lowestDistComboArray.pop();
                     lowestDistComboArray.push(...sortedRolls);
-                    console.log("Lowest dist array: ", lowestDistComboArray);
                     currentTraversed = initialTraversed + memoDist[i][j];
                     traversedArray.push(currentTraversed);
                     numLowestDist++;
@@ -185,11 +190,11 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill = true, isAdult = false) 
             rollComboArray = allPossibleCombos[i];
         };
     };
-
-    console.log("Roll combo: ", rollComboArray);
+    console.log("Lowest optimal dist array (prevent bonk): ", lowestDistComboArray);
+    console.log("Preferred roll combo: ", rollComboArray);
     console.log("All combos: ", allPossibleCombos);
     console.log("Distances traversed: ", traversedArray);
     console.log("Lowest distance combos: ", numLowestDist);
 };
 
-calculateRolls(12, 12, 60, 500)
+calculateRolls(12.22, 10.54, 60.5, 988.223)
