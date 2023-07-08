@@ -11,13 +11,13 @@
         <div class="all-coordinates">
             <div class="start">
                 <label for="startX" class="coordinate-label">Start X<sub>1</sub>, Z<sub>1</sub></label>
-                <input type="text" id="startX" class ="coordinate" placeholder="X1...">
-                <input type="text" id="startZ" class ="coordinate" placeholder="Z1...">
+                <input type="text" id="startX" class ="coordinate" placeholder="X1..." oninput="restrictInput(this)">
+                <input type="text" id="startZ" class ="coordinate" placeholder="Z1..." oninput="restrictInput(this)">
             </div>
             <div class="end">
                 <label for="endX" class="coordinate-label">End X<sub>2</sub>, Z<sub>2</sub></label>
-                <input type="text" id="endX" class ="coordinate" placeholder="X2...">
-                <input type="text" id="endZ" class ="coordinate" placeholder="Z2...">
+                <input type="text" id="endX" class ="coordinate" placeholder="X2..." oninput="restrictInput(this)">
+                <input type="text" id="endZ" class ="coordinate" placeholder="Z2..."oninput="restrictInput(this)">
             </div>
         </div>
         <div class="age-standstill-submit">
@@ -33,7 +33,7 @@
                 </select>
             </div>
         </div>
-        <button type="button" id="calculate">Calculate</button>
+        <button type="button" id="calculate" onclick="validateInput()">CALCULATE</button>
     </form>
     <script type="text/javascript" src="rollcalculator.js"></script>
 </body>

@@ -67,11 +67,14 @@ body {
     margin: 5px;
 }
 
+.age-label {
+    margin-right: 0.25rem;
+}
 .age-selector select {
     height: 28px;
     padding: 4px;
     margin: 5px;
-    width: 6rem;
+    width: 6.5rem;
     font-size: 16px;
     outline-style: solid;
     outline-width: 2px;
@@ -104,17 +107,32 @@ body {
     margin: 5px;
 }
 
+.standstill-container {
+    margin-left: 5px;
+    padding: 4px;
+    outline-style: solid;
+    outline-width: 2px;
+    border-style: none;
+    border-radius: 6px;
+    outline-color: #1f2b3a;
+}
+
+.standstill-container
+
 input[type="checkbox"] {
     width: 12px;
-    height: 12px;
+    height: 13px;
     border-style: none;
     transition: background-color 0.3s;
     background-color: #fff;
 }
 
 #calculate {
+    width: 21rem;
+    font-size: 24px;
     margin: auto;
-    height: 2rem;
+    margin-top: 0.75rem;
+    height: 3rem;
     border: none;
     border-radius: 6px;
     outline-style: solid;
@@ -131,6 +149,10 @@ input[type="checkbox"] {
     background-color: #161d27;
 }
 
+#calculate:active {
+    transform: scale(98%);
+}
+
 #canvas {
     margin-top: 20px;
     border-radius: 5px;
@@ -138,4 +160,14 @@ input[type="checkbox"] {
     border-color: black;
     border-style: solid;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+.invalid-input {
+    outline: #5e0b0b 2px solid;
+    transition: 200ms;
+    box-shadow: 0px 0px 6px rgb(255, 0, 0);
+}
+
+.canvas-container {
+    color: red;
 }
