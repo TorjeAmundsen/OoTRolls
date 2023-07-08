@@ -48,6 +48,76 @@ let rollsTimeMatrix = Array(10).fill().map(() => Array(10).fill(0));
 let memoTime = Array(10).fill().map(() => Array(10).fill(999));
 let memoDist = Array(10).fill().map(() => Array(10).fill(null));
 
+let canvas = document.getElementById("canvas");
+let context = canvas.getContext("2d");
+
+let spacing             = 1;
+let rollStrokeWidth     = 2;
+let rollStrokeColor     = "#000000";
+let textStrokeWidth     = 2;
+let textStrokeColor     = "#ffffff"
+let textFillColor       = "#000000"
+
+canvas.height = 25+16;
+canvas.width = 600;
+
+canvas.style.background = "#12161c";
+
+context.font = "bold 12px arial, sans-serif"
+
+const manualColorsArray = [
+    "#c22929", // 0 spacing, red
+    "#c25729", // 1 spacing is dogshit and will never occur
+    "#c26929", // 2 spacing, orange
+    "#c2c229", // 3 spacing, yellow
+    "#29c229", // 4 spacing, green
+    "#29c2ab", // 5 spacing, turquoise
+    "#29b0c2", // 6 spacing, light blue
+    "#2964c2", // 7 spacing, cornflower blue
+    "#2936c2", // 8 spacing, purpleish
+    "#4529c2"  // 9 spacing, purple
+]
+
+function drawRolls(rolls, stroke = false) {
+    context.lineWidth = rollStrokeWidth;
+    context.strokeStyle = rollStrokeColor;
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = manualColorsArray[rolls[0]];
+    let totalSpacing = rolls.reduce((a, b) => a + b, 0);
+    let rollFrames = (rolls.length * 12) + totalSpacing;
+    let pxPerFrame = (canvas.width - 16 - (spacing * (rolls.length-1))) / rollFrames;
+    let rollDrawnLength = (rolls[0]+12) * pxPerFrame;
+    if (stroke) {
+        context.strokeRect(7, 7, rollDrawnLength + 2 , 27);
+    };
+    context.fillRect(8, 8, rollDrawnLength, 25);
+    let pushAlong = rollDrawnLength + spacing;
+    let textPos = (rollDrawnLength/2) + 3;
+    context.lineWidth = textStrokeWidth;
+    context.strokeStyle = textStrokeColor;
+    context.strokeText(rolls[0], textPos, 25);
+    context.fillStyle = textFillColor;
+    context.fillText(rolls[0], textPos, 25);
+    for (let i = 1; i < rolls.length; i++) {
+        context.lineWidth = rollStrokeWidth;
+        context.strokeStyle = rollStrokeColor;
+        context.fillStyle = manualColorsArray[rolls[i]];
+        rollDrawnLength = (rolls[i]+12) * pxPerFrame;
+        if (stroke) {
+            context.strokeRect(7 + pushAlong, 7, rollDrawnLength + 2 , 27);
+        };
+        context.fillRect(8 + pushAlong, 8, rollDrawnLength, 25);
+        pushAlong = pushAlong + rollDrawnLength + spacing;
+        textPos = (pushAlong-((rollDrawnLength/2))) + 3;
+        context.lineWidth = textStrokeWidth;
+        context.strokeStyle = textStrokeColor;
+        context.strokeText(rolls[i], textPos, 25);
+        context.fillStyle = textFillColor;
+        context.fillText(rolls[i], textPos, 25);
+    };
+    document.getElementById("canvas").classList.add("active");
+};
+
 function fillMatrixes(isAdult = false) {
     if (!isAdult) {
         for (let i = 0; i < rollsDistMatrix.length; i++) {
@@ -207,13 +277,12 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill = true, isAdult = false) 
             rollComboArray = allPossibleCombos[i];
         };
     };
+    drawRolls(rollComboArray, true);
     console.log("Preferred roll combo: ", rollComboArray);
     console.log("All combos: ", allPossibleCombos);
     console.log("Distances traversed: ", traversedArray);
     console.log("Lowest distance combos: ", numLowestDist);
 };
-
-calculateRolls(12.22, 10.54, 60.5, 988.223)
 
 function restrictInput(input) {
     let regex = /^-?\d+(\.\d+)?$/;
@@ -260,3 +329,9 @@ function validateInput() {
         calculateRolls(x1, z1, x2, z2, standstill, isAdult)
     };
 };
+
+document.querySelector("body").addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+        validateInput();
+    }
+});

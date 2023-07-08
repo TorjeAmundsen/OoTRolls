@@ -20,7 +20,6 @@ canvas.style.background = "#12161c";
 
 context.font = "bold 12px arial, sans-serif"
 
-
 const manualColorsArray = [
     "#c22929", // 0 spacing, red
     "#c25729", // 1 spacing is dogshit and will never occur
@@ -33,41 +32,6 @@ const manualColorsArray = [
     "#2936c2", // 8 spacing, purpleish
     "#4529c2"  // 9 spacing, purple
 ]
-
-
-function generateHslaColors (saturation, lightness, alpha, amount) {
-    let colors = [];
-    let huedelta = Math.trunc(360 / amount);
-    for (let i = 0; i < amount; i++) {
-      let hue = i * huedelta;
-      colors.push(`hsla(${hue},${saturation}%,${lightness}%,${alpha})`);
-    };
-    return colors;
-};
-
-let drawnColorsArray = generateHslaColors(70, 70, 1.0, 25);
-
-function nextColor(shiftBy) {
-    factor = 1;
-    if (shiftBy == 0) {
-        console.log(drawnColorsArray);
-        return;
-    } else if (shiftBy > 0) {
-        for (i = 0; i < (shiftBy*factor); i++) {
-            color = drawnColorsArray.shift();
-            drawnColorsArray.push(color);
-        };
-    } else if (shiftBy < 0) {
-        for (i = 0; i > (shiftBy*factor); i--) {
-            drawnColorsArray.unshift(drawnColorsArray[9]);
-            drawnColorsArray.pop();
-        };
-    };
-    context.fillStyle = drawnColorsArray[0];
-    console.log(drawnColorsArray);
-};
-
-//nextColor(8);
 
 function drawRolls(rolls, stroke = false) {
     context.lineWidth = rollStrokeWidth;
