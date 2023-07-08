@@ -134,6 +134,7 @@ function fillMatrixes(isAdult = false) {
             };
         };
     };
+    console.log("Distance matrix: ", rollsDistMatrix);
 };
 
 function resetArrays() {
@@ -148,18 +149,19 @@ function resetArrays() {
 
 function getDistance(x1, z1, x2, z2) {
     distance = Math.sqrt(((x1 - x2) ** 2) + ((z1 - z2) ** 2));
-    console.log(`Calculated distance: ${distance}`);
     return distance;
 };
 
 function calculateRolls(x1, z1, x2, z2, fromStandstill = true, isAdult = false) {
     console.log(`Input coordinates: [${x1}, ${z1}] [${x2}, ${z2}]`)
 
+    resetArrays();
+    fillMatrixes(isAdult);
+
     let totalDistance = getDistance(x1, z1, x2, z2);
     let timeList1D = [];
     let distList1D = [];
-    resetArrays();
-    fillMatrixes(isAdult);
+    
     if (!isAdult) {
         optimalRollDist = rollDistancesChild[4][0];
         standstillRollDist = rollDistancesChildStandstill[4][0];
@@ -177,6 +179,10 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill = true, isAdult = false) 
     if (remainderDistance > rollsDistMatrix[9][9]) {
         remainderDistance -= optimalRollDist;
         goodRolls += 1;
+    };
+    if (goodRolls < 0) {
+        invalidateInput();
+        return;
     };
     let rollComboArray = [];
     rollComboArray = Array(goodRolls).fill(4);
@@ -246,7 +252,6 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill = true, isAdult = false) 
 
     if (lowestDist != highestDist) {
         lowestDistComboArray = Array(goodRolls).fill(4);
-        console.log("Shorter optimal rolls possible.")
         for (let [i, row] of memoDist.entries()) {
             for (let [j, value] of row.entries()) {
                 if (value == lowestDist) {
@@ -308,7 +313,7 @@ function validateInput() {
         z2
     ];
 
-    elements = [
+    let elements = [
         document.getElementById("startX"),
         document.getElementById("startZ"),
         document.getElementById("endX"),
@@ -319,14 +324,25 @@ function validateInput() {
         for (let [i, j] of coords.entries()) {
             console.log(j)
             if (isNaN(j)) {
-                console.log("Not a number matched")
                 elements[i].classList.add("invalid-input");
             } else {
                 elements[i].classList.remove("invalid-input")
             };
         };
     } else {
-        calculateRolls(x1, z1, x2, z2, standstill, isAdult)
+        calculateRolls(x1, z1, x2, z2, standstill, isAdult);
+    };
+};
+
+function invalidateInput() {
+    let elements = [
+        document.getElementById("startX"),
+        document.getElementById("startZ"),
+        document.getElementById("endX"),
+        document.getElementById("endZ")
+    ];
+    for (let i of elements) {
+        i.classList.add("invalid-input");
     };
 };
 
