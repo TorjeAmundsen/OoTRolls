@@ -326,16 +326,6 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill = true, isAdult = false) 
     console.log("Lowest distance combos: ", numLowestDist);
 };
 
-function restrictInput(input) {
-    let regex = /^-?\d+(\.\d+)?$/;
-    let userInput = input.value;
-    if (!regex.test(userInput)) {
-        input.value = userInput.replace(new RegExp(`[${regex.source}]`, "g"), "");
-    } else {
-        input.classList.remove("invalid-input")
-    }
-};
-
 function validateInput() {
     x1          = document.getElementById("startX").value;
     z1          = document.getElementById("startZ").value;
@@ -396,13 +386,19 @@ document.querySelector("body").addEventListener("keypress", function (e) {
 });
 
 let invis = true;
-function toggleIndev(button) {
-    document.getElementById("coming").classList.toggle("invis");
+async function toggleIndev(button) {
+    classes = document.getElementById("coming").classList;
     invis = !invis;
-    console.log("Invis: ", invis);
+    const delay = (delayInms) => {
+        return new Promise(resolve => setTimeout(resolve, delayInms));
+    }
+    classes.toggle("invis");
+    classes.remove("display-none")
     if (invis) {
-        button.innerHTML = "Show upcoming features"
+        button.innerHTML = "Show upcoming features";
+        await delay(100);
+        classes.add("display-none");
     } else {
-        button.innerHTML = "Hide upcoming features"
+        button.innerHTML = "Hide upcoming features";
     }
 }

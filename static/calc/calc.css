@@ -5,12 +5,12 @@ body {
     font-size: 16px;
 }
 
-#indev {    
+#indev {
     width: 12rem;
     font-size: 16px;
     margin: auto;
     margin-top: 0.75rem;
-    margin-left: +.8rem;
+    margin-left: 0.8rem;
     height: 2rem;
     border: none;
     border-radius: 6px;
@@ -38,14 +38,28 @@ body {
 }
 
 .coming {
+    display: block;
     position:absolute;
-    margin-left: 1rem;
-    width: 20rem;
+    margin-left: 0.7rem;
+    margin-top: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
+    width: 28rem;
     transition: 100ms;
+    border-radius: 0.5rem;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #171d25;
+    background-color: #11171f;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .coming.invis {
     opacity: 0%;
+}
+
+.display-none {
+ display: none;
 }
 
 ::selection{
@@ -233,4 +247,15 @@ canvas {
 
 .canvas-container {
     color: red;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    appearance: textfield;
+    -moz-appearance: textfield;
 }
