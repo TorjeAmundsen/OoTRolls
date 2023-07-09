@@ -23,12 +23,12 @@
                 <div class="start">
                     <label for="startX" class="coordinate-label">Start X<sub>1</sub>, Z<sub>1</sub></label>
                     <input type="number" id="startX" class ="coordinate" placeholder="X1...">
-                    <input type="text" id="startZ" class ="coordinate" placeholder="Z1..." oninput="restrictInput(this)">
+                    <input type="text" id="startZ" class ="coordinate" placeholder="Z1...">
                 </div>
                 <div class="end">
                     <label for="endX" class="coordinate-label">End X<sub>2</sub>, Z<sub>2</sub></label>
-                    <input type="text" id="endX" class ="coordinate" placeholder="X2..." oninput="restrictInput(this)">
-                    <input type="text" id="endZ" class ="coordinate" placeholder="Z2..."oninput="restrictInput(this)">
+                    <input type="text" id="endX" class ="coordinate" placeholder="X2...">
+                    <input type="text" id="endZ" class ="coordinate" placeholder="Z2...">
                 </div>
             </div>
             <div class="age-standstill-submit">
@@ -46,8 +46,10 @@
             </div>
             <button type="button" id="calculate" onclick="validateInput()">CALCULATE</button>
         </form>
-        <canvas id="even-canvas"></canvas>
-        <canvas id="main-canvas"></canvas>
+        <div id="canvas-container">
+            <canvas id="even-canvas"></canvas>
+            <!-- <canvas id="main-canvas"></canvas> -->
+        </div>
     </div>
     <script type="text/javascript" src="rollcalculator.js"></script>
 </body>

@@ -51,8 +51,8 @@ let rollsTimeMatrix = Array(10).fill().map(() => Array(10).fill(0));
 let memoTime = Array(10).fill().map(() => Array(10).fill(999));
 let memoDist = Array(10).fill().map(() => Array(10).fill(null));
 
-let mainCanvas = document.getElementById("main-canvas");
-let mainContext = mainCanvas.getContext("2d");
+/* let mainCanvas = document.getElementById("main-canvas");
+let mainContext = mainCanvas.getContext("2d"); */
 
 let evenCanvas = document.getElementById("even-canvas");
 let evenContext = evenCanvas.getContext("2d");
@@ -61,22 +61,25 @@ let spacing             = 1;
 let rollStrokeWidth     = 2;
 let rollStrokeColor     = "#000000";
 let textStrokeWidth     = 2;
-let textStrokeColor     = "#ffffff"
-let textFillColor       = "#000000"
-
-mainCanvas.height = 25+16;
+let textStrokeColor     = "#ffffff";
+let textFillColor       = "#000000";
+let canvasFont          = "bold 12px arial, sans-serif";
+let canvasHeight        = 41;
+let canvasWidth         = 600;
+let backgroundColor     = "#12161c";
+/* mainCanvas.height = 25+16;
 mainCanvas.width = 600;
 
 mainCanvas.style.background = "#12161c";
 
-mainContext.font = "bold 12px arial, sans-serif"
+mainContext.font = "bold 12px arial, sans-serif" */
 
-evenCanvas.height = 25+16;
-evenCanvas.width = 600;
+evenCanvas.height = canvasHeight;
+evenCanvas.width = canvasWidth;
 
-evenCanvas.style.background = "#12161c";
+evenCanvas.style.background = backgroundColor;
 
-evenContext.font = "bold 12px arial, sans-serif"
+evenContext.font = canvasFont;
 
 const manualColorsArray = [
     "#c22929", // 0 spacing, red
@@ -320,8 +323,8 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill = true, isAdult = false) 
     } else {
         evenCanvas.classList.remove("active")
     };
-    
-    drawRolls(rollComboArray, mainContext, mainCanvas, true);
+    createCanvases(allPossibleCombos);
+    //drawRolls(rollComboArray, mainContext, mainCanvas, true);
     console.log("Preferred roll combo: ", rollComboArray);
     console.log("All combos: ", allPossibleCombos);
     console.log("Distances traversed: ", traversedArray);
@@ -404,3 +407,19 @@ async function toggleIndev(button) {
         button.innerHTML = "Hide upcoming features";
     }
 }
+
+function createCanvases(combos) {
+    let container = document.getElementById("canvas-container")
+    container.innerHTML = `<canvas id="even-canvas"></canvas>`
+    for (let [i, value] of combos.entries()) {
+        container.appendChild(Object.assign(
+            document.createElement("canvas"), { id : `canvas-${i}`, height : "41", width : "600"}
+        ));
+        drawRolls(
+            rolls   = value,
+            context = document.getElementById(`canvas-${i}`).getContext("2d"),
+            canvas  = document.getElementById(`canvas-${i}`),
+            stroke  = true
+            );
+    };
+};
