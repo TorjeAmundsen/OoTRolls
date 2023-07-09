@@ -171,6 +171,10 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill = true, isAdult = false) 
     fillMatrixes(isAdult);
 
     let totalDistance = getDistance(x1, z1, x2, z2);
+    if (totalDistance > 15000) {
+        invalidateInput(false);
+        return;
+    }
     let timeList1D = [];
     let distList1D = [];
 
