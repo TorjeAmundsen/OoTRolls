@@ -1,14 +1,16 @@
 const rollDistancesChild = [
-    [118.500, 12], // 12 frames total, 0 frames spacing
-    [118.875, 13], // 13 frames total, 1 frame  spacing
-    [134.250, 14], // 14 frames total, 2 frames spacing
-    [149.625, 15], // 15 frames total, 3 frames spacing
-    [161.625, 16], // 16 frames total, 4 frames spacing
-    [169.875, 17], // 17 frames total, 5 frames spacing
-    [178.125, 18], // 18 frames total, 6 frames spacing
-    [186.375, 19], // 19 frames total, 7 frames spacing
-    [194.625, 20], // 20 frames total, 8 frames spacing
-    [202.875, 21], // 21 frames total, 9 frames spacing
+    [118.500, 12], // 12 frames total,  0 frames spacing
+    [118.875, 13], // 13 frames total,  1 frame  spacing
+    [134.250, 14], // 14 frames total,  2 frames spacing
+    [149.625, 15], // 15 frames total,  3 frames spacing
+    [161.625, 16], // 16 frames total,  4 frames spacing
+    [169.875, 17], // 17 frames total,  5 frames spacing
+    [178.125, 18], // 18 frames total,  6 frames spacing
+    [186.375, 19], // 19 frames total,  7 frames spacing
+    [194.625, 20], // 20 frames total,  8 frames spacing
+    [202.875, 21]  // 21 frames total,  9 frames spacing
+    //[211.125, 22], // 21 frames total, 10 frames spacing
+    //[219.375, 23]  // 23 frames total, 11 frames spacing
 ];
 
 const rollDistancesChildStandstill = [
@@ -19,8 +21,8 @@ const rollDistancesChildStandstill = [
     [160.500, 16], // 4 frames of walking roll 16f
     [168.750, 17], // 5 frames of walking roll 17f
     [177.000, 18], // 6 frames of walking roll 18f
-    [185.250, 18], // 7 frames of walking roll 19f
-    [193.500, 18]  // 8 frames of walking roll 20f
+    [185.250, 19], // 7 frames of walking roll 19f
+    [193.500, 20]  // 8 frames of walking roll 20f
 ];
 
 const rollDistancesAdult = [
