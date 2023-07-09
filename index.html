@@ -7,13 +7,14 @@
     <title>OoT Roll Calculator</title>
 </head>
 <body>
-    <div class="coming" id="coming">
-        <p>Coming:</p>
+    <button id="indev" class="indev" onclick="toggleIndev(this)">Show upcoming features</button>
+    <div class="coming invis" id="coming">
+        <p>Features in development:</p>
         <p>Initial speed input</p>
-        <p>Loading zone touch (gaining control not important)</p>
+        <p>(Right now, unchecking standstill means you're starting from the end of a roll, not full walking speed)</p>
+        <p>Loading zone touch (gaining control not important). I don't even know if this would be a different outcome, but I feel like it will be in some cases. Will test.</p>
         <p>Dropdown with more combos selectable</p>
-        <p>Notation explanation</p>
-        <p>(This will automatically be hidden)</p>
+        <p>Clear explanation of displayed data</p>
     </div>
     <div class="container">
         <form class="form">

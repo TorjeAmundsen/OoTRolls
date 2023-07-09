@@ -327,7 +327,6 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill = true, isAdult = false) 
 };
 
 function restrictInput(input) {
-    document.getElementById("coming").classList.add("invis");
     let regex = /^-?\d+(\.\d+)?$/;
     let userInput = input.value;
     if (!regex.test(userInput)) {
@@ -338,7 +337,6 @@ function restrictInput(input) {
 };
 
 function validateInput() {
-    document.getElementById("coming").classList.add("invis");
     x1          = document.getElementById("startX").value;
     z1          = document.getElementById("startZ").value;
     x2          = document.getElementById("endX").value;
@@ -396,3 +394,15 @@ document.querySelector("body").addEventListener("keypress", function (e) {
         validateInput();
     }
 });
+
+let invis = true;
+function toggleIndev(button) {
+    document.getElementById("coming").classList.toggle("invis");
+    invis = !invis;
+    console.log("Invis: ", invis);
+    if (invis) {
+        button.innerHTML = "Show upcoming features"
+    } else {
+        button.innerHTML = "Hide upcoming features"
+    }
+}
