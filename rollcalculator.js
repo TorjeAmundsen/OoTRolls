@@ -41,6 +41,7 @@ const rollDistancesAdultStandstill = [
 ];
 
 let allPossibleCombos = [];
+let allPossibleCombosEven = [];
 
 let rollsDistMatrix = Array(10).fill().map(() => Array(10).fill(0));
 let rollsTimeMatrix = Array(10).fill().map(() => Array(10).fill(0));
@@ -48,8 +49,11 @@ let rollsTimeMatrix = Array(10).fill().map(() => Array(10).fill(0));
 let memoTime = Array(10).fill().map(() => Array(10).fill(999));
 let memoDist = Array(10).fill().map(() => Array(10).fill(null));
 
-let canvas = document.getElementById("canvas");
-let context = canvas.getContext("2d");
+let mainCanvas = document.getElementById("main-canvas");
+let mainContext = mainCanvas.getContext("2d");
+
+let evenCanvas = document.getElementById("even-canvas");
+let evenContext = evenCanvas.getContext("2d");
 
 let spacing             = 1;
 let rollStrokeWidth     = 2;
@@ -58,12 +62,19 @@ let textStrokeWidth     = 2;
 let textStrokeColor     = "#ffffff"
 let textFillColor       = "#000000"
 
-canvas.height = 25+16;
-canvas.width = 600;
+mainCanvas.height = 25+16;
+mainCanvas.width = 600;
 
-canvas.style.background = "#12161c";
+mainCanvas.style.background = "#12161c";
 
-context.font = "bold 12px arial, sans-serif"
+mainContext.font = "bold 12px arial, sans-serif"
+
+evenCanvas.height = 25+16;
+evenCanvas.width = 600;
+
+evenCanvas.style.background = "#12161c";
+
+evenContext.font = "bold 12px arial, sans-serif"
 
 const manualColorsArray = [
     "#c22929", // 0 spacing, red
@@ -78,7 +89,7 @@ const manualColorsArray = [
     "#4529c2"  // 9 spacing, purple
 ]
 
-function drawRolls(rolls, stroke = false) {
+function drawRolls(rolls, context, canvas, stroke = false) {
     context.lineWidth = rollStrokeWidth;
     context.strokeStyle = rollStrokeColor;
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -115,7 +126,7 @@ function drawRolls(rolls, stroke = false) {
         context.fillStyle = textFillColor;
         context.fillText(rolls[i], textPos, 25);
     };
-    document.getElementById("canvas").classList.add("active");
+    canvas.classList.add("active");
 };
 
 function fillMatrixes(isAdult = false) {
@@ -139,6 +150,7 @@ function fillMatrixes(isAdult = false) {
 
 function resetArrays() {
     allPossibleCombos = [];
+    allPossibleCombosEven = [];
 
     rollsDistMatrix = Array(10).fill().map(() => Array(10).fill(0));
     rollsTimeMatrix = Array(10).fill().map(() => Array(10).fill(0));
@@ -154,14 +166,14 @@ function getDistance(x1, z1, x2, z2) {
 
 function calculateRolls(x1, z1, x2, z2, fromStandstill = true, isAdult = false) {
     console.log(`Input coordinates: [${x1}, ${z1}] [${x2}, ${z2}]`)
-
+    
     resetArrays();
     fillMatrixes(isAdult);
 
     let totalDistance = getDistance(x1, z1, x2, z2);
     let timeList1D = [];
     let distList1D = [];
-    
+
     if (!isAdult) {
         optimalRollDist = rollDistancesChild[4][0];
         standstillRollDist = rollDistancesChildStandstill[4][0];
@@ -184,6 +196,7 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill = true, isAdult = false) 
         invalidateInput();
         return;
     };
+    invalidateInput(true);
     let rollComboArray = [];
     rollComboArray = Array(goodRolls).fill(4);
     console.log(`Initial roll combo: ${rollComboArray}`)
@@ -276,13 +289,33 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill = true, isAdult = false) 
         };
         console.log("Lowest dist combo: ", lowestDistComboArray);
     };
-
+    let comboLength = rollComboArray.length;
     for (let [i, j] of allPossibleCombos.entries()) {
-        if (j[rollComboArray.length - 2] == 4) {
+        if (j[comboLength - 2] == 4) {
             rollComboArray = allPossibleCombos[i];
         };
     };
-    drawRolls(rollComboArray, true);
+
+    let total = 0;
+
+    for(let i = 0; i < comboLength; i++) {
+        total += rollComboArray[i];
+    }
+    let remainder = total % comboLength;
+    let avg = Math.floor(total / comboLength);
+    if (avg > 4 || (avg == 4 && remainder > 1)) {
+        let evenlySpacedCombo = Array(comboLength).fill(avg);
+        if (remainder != 0) {
+            for (let i = comboLength - 1; i > comboLength - 1 - remainder; i--) {
+                evenlySpacedCombo[i] += 1
+            };
+        };
+        drawRolls(evenlySpacedCombo, evenContext, evenCanvas, true);
+    } else {
+        evenCanvas.classList.remove("active")
+    };
+    
+    drawRolls(rollComboArray, mainContext, mainCanvas, true);
     console.log("Preferred roll combo: ", rollComboArray);
     console.log("All combos: ", allPossibleCombos);
     console.log("Distances traversed: ", traversedArray);
@@ -300,33 +333,35 @@ function restrictInput(input) {
 };
 
 function validateInput() {
-    x1          = parseFloat(document.getElementById("startX").value);
-    z1          = parseFloat(document.getElementById("startZ").value);
-    x2          = parseFloat(document.getElementById("endX").value);
-    z2          = parseFloat(document.getElementById("endZ").value);
-    isAdult     = (document.getElementById("age").value === "1");
-    standstill  = document.querySelector('.standstill').checked;
-    coords = [
+    x1          = document.getElementById("startX").value;
+    z1          = document.getElementById("startZ").value;
+    x2          = document.getElementById("endX").value;
+    z2          = document.getElementById("endZ").value;
+    let coords = [
         x1,
         z1,
         x2,
         z2
     ];
-
     let elements = [
         document.getElementById("startX"),
         document.getElementById("startZ"),
         document.getElementById("endX"),
         document.getElementById("endZ")
     ];
+    for (let [i, j] of coords.entries()) {
+        if (j === "") {
+            elements[i].value = "0";
+        };
+    };
+    isAdult     = (document.getElementById("age").value === "1");
+    standstill  = document.querySelector('.standstill').checked;
 
     if (coords.includes(NaN)) {
         for (let [i, j] of coords.entries()) {
             console.log(j)
             if (isNaN(j)) {
                 elements[i].classList.add("invalid-input");
-            } else {
-                elements[i].classList.remove("invalid-input")
             };
         };
     } else {
@@ -334,7 +369,7 @@ function validateInput() {
     };
 };
 
-function invalidateInput() {
+function invalidateInput(state = false) {
     let elements = [
         document.getElementById("startX"),
         document.getElementById("startZ"),
@@ -342,7 +377,11 @@ function invalidateInput() {
         document.getElementById("endZ")
     ];
     for (let i of elements) {
-        i.classList.add("invalid-input");
+        if (!state) {
+            i.classList.add("invalid-input");
+        } else {
+            i.classList.remove("invalid-input");
+        }
     };
 };
 
