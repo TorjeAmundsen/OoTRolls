@@ -7,36 +7,46 @@
     <title>OoT Roll Calculator</title>
 </head>
 <body>
-    <form class="form">
-        <div class="all-coordinates">
-            <div class="start">
-                <label for="startX" class="coordinate-label">Start X<sub>1</sub>, Z<sub>1</sub></label>
-                <input type="text" id="startX" class ="coordinate" placeholder="X1..." oninput="restrictInput(this)">
-                <input type="text" id="startZ" class ="coordinate" placeholder="Z1..." oninput="restrictInput(this)">
+    <div class="coming" id="coming">
+        <p>Coming:</p>
+        <p>Initial speed input</p>
+        <p>Loading zone touch (gaining control not important)</p>
+        <p>Dropdown with more combos selectable</p>
+        <p>Notation explanation</p>
+        <p>(This will automatically be hidden)</p>
+    </div>
+    <div class="container">
+        <form class="form">
+            <div class="all-coordinates">
+                <div class="start">
+                    <label for="startX" class="coordinate-label">Start X<sub>1</sub>, Z<sub>1</sub></label>
+                    <input type="text" id="startX" class ="coordinate" placeholder="X1..." oninput="restrictInput(this)">
+                    <input type="text" id="startZ" class ="coordinate" placeholder="Z1..." oninput="restrictInput(this)">
+                </div>
+                <div class="end">
+                    <label for="endX" class="coordinate-label">End X<sub>2</sub>, Z<sub>2</sub></label>
+                    <input type="text" id="endX" class ="coordinate" placeholder="X2..." oninput="restrictInput(this)">
+                    <input type="text" id="endZ" class ="coordinate" placeholder="Z2..."oninput="restrictInput(this)">
+                </div>
             </div>
-            <div class="end">
-                <label for="endX" class="coordinate-label">End X<sub>2</sub>, Z<sub>2</sub></label>
-                <input type="text" id="endX" class ="coordinate" placeholder="X2..." oninput="restrictInput(this)">
-                <input type="text" id="endZ" class ="coordinate" placeholder="Z2..."oninput="restrictInput(this)">
+            <div class="age-standstill-submit">
+                <div class="standstill-container">
+                    <input type="checkbox" id="standstill" class="standstill">
+                    <label for="standstill">From standstill?</label>
+                </div>
+                <div class="age-selector">
+                    <label for="age" class="age-label">Age</label>
+                    <select class="age" id="age">
+                        <option value=0>Child</option>
+                        <option value=1>Adult</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="age-standstill-submit">
-            <div class="standstill-container">
-                <input type="checkbox" id="standstill" class="standstill">
-                <label for="standstill">From standstill?</label>
-            </div>
-            <div class="age-selector">
-                <label for="age" class="age-label">Age</label>
-                <select class="age" id="age">
-                    <option value=0>Child</option>
-                    <option value=1>Adult</option>
-                </select>
-            </div>
-        </div>
-        <button type="button" id="calculate" onclick="validateInput()">CALCULATE</button>
-    </form>
-    <canvas id="even-canvas"></canvas>
-    <canvas id="main-canvas"></canvas>
+            <button type="button" id="calculate" onclick="validateInput()">CALCULATE</button>
+        </form>
+        <canvas id="even-canvas"></canvas>
+        <canvas id="main-canvas"></canvas>
+    </div>
     <script type="text/javascript" src="rollcalculator.js"></script>
 </body>
 </html>

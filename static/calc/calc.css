@@ -1,10 +1,22 @@
 body {
-    font-family: Arial, sans-serif;
     color: #98c8df;
     background-color: #0d1117;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+.container {
     margin: 1rem;
     padding: 2rem;
-    font-size: 16px;
+}
+
+.coming {
+    position:absolute;
+}
+
+.coming.invis {
+    transition: 300ms;
+    opacity: 0%;
 }
 
 ::selection{
@@ -153,20 +165,6 @@ input[type="checkbox"] {
 #calculate:active {
     transform: scale(98%);
 }
-
-/* #even-canvas {
-    display: none;
-    margin-left: auto;
-    margin-right: auto;
-    height: 41px;
-    width: 600px;
-    margin-top: 4rem;
-    border-radius: 5px;
-    border-width: 2px;
-    border-color: black;
-    border-style: solid;
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-} */
 
 canvas {
     display: none;
