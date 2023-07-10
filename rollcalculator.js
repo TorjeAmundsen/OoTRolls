@@ -8,8 +8,8 @@ const rollDistancesChild = [
     [178.125, 18], // 18 frames total,  6 frames spacing
     [186.375, 19], // 19 frames total,  7 frames spacing
     [194.625, 20], // 20 frames total,  8 frames spacing
-    [202.875, 21]  // 21 frames total,  9 frames spacing
-    //[211.125, 22], // 21 frames total, 10 frames spacing
+    //[202.875, 21]  // 21 frames total,  9 frames spacing
+    //[211.125, 22], // 22 frames total, 10 frames spacing
     //[219.375, 23]  // 23 frames total, 11 frames spacing
 ];
 
@@ -35,21 +35,29 @@ const rollDistancesAdult = [
     [196.500, 18], // 18 frames total, 6 frames spacing
     [205.500, 19], // 19 frames total, 7 frames spacing
     [214.500, 20], // 20 frames total, 8 frames spacing
-    [223.500, 21]  // 21 frames total, 9 frames spacing
+    //[223.500, 21]  // 21 frames total, 9 frames spacing
 ];
 
 const rollDistancesAdultStandstill = [
-    // Coming
+    [124.500, 12], // 12 frames total, 0 frames spacing
+    [124.500, 13], // 13 frames total, 1 frame  spacing
+    [144.000, 14], // 14 frames total, 2 frames spacing
+    [160.500, 15], // 15 frames total, 3 frames spacing
+    [174.000, 16], // 16 frames total, 4 frames spacing
+    [183.000, 17], // 17 frames total, 5 frames spacing
+    [192.000, 18], // 18 frames total, 6 frames spacing
+    [201.000, 19], // 19 frames total, 7 frames spacing
+    [210.000, 20], // 20 frames total, 8 frames spacing
 ];
 
 let allPossibleCombos = [];
 let allPossibleCombosEven = [];
 
-let rollsDistMatrix = Array(10).fill().map(() => Array(10).fill(0));
-let rollsTimeMatrix = Array(10).fill().map(() => Array(10).fill(0));
+let rollsDistMatrix = Array(9).fill().map(() => Array(9).fill(0));
+let rollsTimeMatrix = Array(9).fill().map(() => Array(9).fill(0));
 
-let memoTime = Array(10).fill().map(() => Array(10).fill(999));
-let memoDist = Array(10).fill().map(() => Array(10).fill(null));
+let memoTime = Array(9).fill().map(() => Array(9).fill(999));
+let memoDist = Array(9).fill().map(() => Array(9).fill(null));
 
 /* let mainCanvas = document.getElementById("main-canvas");
 let mainContext = mainCanvas.getContext("2d"); */
@@ -67,12 +75,6 @@ let canvasFont          = "bold 12px arial, sans-serif";
 let canvasHeight        = 41;
 let canvasWidth         = 600;
 let backgroundColor     = "#12161c";
-/* mainCanvas.height = 25+16;
-mainCanvas.width = 600;
-
-mainCanvas.style.background = "#12161c";
-
-mainContext.font = "bold 12px arial, sans-serif" */
 
 evenCanvas.height = canvasHeight;
 evenCanvas.width = canvasWidth;
@@ -157,11 +159,11 @@ function resetArrays() {
     allPossibleCombos = [];
     allPossibleCombosEven = [];
 
-    rollsDistMatrix = Array(10).fill().map(() => Array(10).fill(0));
-    rollsTimeMatrix = Array(10).fill().map(() => Array(10).fill(0));
+    rollsDistMatrix = Array(9).fill().map(() => Array(9).fill(0));
+    rollsTimeMatrix = Array(9).fill().map(() => Array(9).fill(0));
 
-    memoTime = Array(10).fill().map(() => Array(10).fill(999));
-    memoDist = Array(10).fill().map(() => Array(10).fill(null));
+    memoTime = Array(9).fill().map(() => Array(9).fill(999));
+    memoDist = Array(9).fill().map(() => Array(9).fill(null));
 };
 
 function getDistance(x1, z1, x2, z2) {
@@ -187,8 +189,7 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill = true, isAdult = false) 
         optimalRollDist = rollDistancesChild[4][0];
         standstillRollDist = rollDistancesChildStandstill[4][0];
     } else {
-        console.log("Adult from standstill data coming, using moving data for now.");
-        optimalRollDist = rollDistancesAdult[4][0];
+        optimalRollDist = rollDistancesAdultStandstill[4][0];
         standstillRollDist = optimalRollDist;
     };
     let goodRolls = Math.floor(totalDistance / optimalRollDist) - 2;
@@ -197,7 +198,7 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill = true, isAdult = false) 
         goodRolls = Math.floor(totalDistance / (optimalRollDist - ((Math.floor(totalDistance / optimalRollDist)) / standstillRollDist))) - 2;
         remainderDistance = remainderDistance + (optimalRollDist - standstillRollDist);
     };
-    if (remainderDistance > rollsDistMatrix[9][9]) {
+    if (remainderDistance > rollsDistMatrix[8][7]) {
         remainderDistance -= optimalRollDist;
         goodRolls += 1;
     };
