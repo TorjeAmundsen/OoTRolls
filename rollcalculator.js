@@ -114,7 +114,7 @@ function drawRolls(rolls, context, canvas, stroke = false) {
         };
         context.fillRect(8 + pushAlong, 8, rollDrawnLength, 25);
         pushAlong = pushAlong + rollDrawnLength + spacing;
-        textPos = (pushAlong-((rollDrawnLength/2))) + 3;
+        textPos = (pushAlong-((rollDrawnLength/2))) + 5 - spacing;
         context.lineWidth = textStrokeWidth;
         context.strokeStyle = textStrokeColor;
         context.strokeText(rolls[i], textPos, 25);
@@ -214,7 +214,7 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill, isAdult) {
     );
 
     for (let [i, combo] of unfilteredRollsResult.entries()) {
-        if (combo[2] == lowestTime) {
+        if (combo[2] == lowestTime/*  || combo[2] == lowestTime + 1 */) {
             pureFilteredCombos.push(JSON.parse(JSON.stringify(unfilteredRollsResult[i][1])));
             filteredCombosData.push(JSON.parse(JSON.stringify(unfilteredRollsResult[i])));
         };
