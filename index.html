@@ -13,7 +13,7 @@
         <p>Initial speed input</p>
         <p>(Right now, unchecking standstill means you're starting from the end of a roll, not full walking speed)</p>
         <p>Loading zone touch (gaining control not important). I don't even know if this would be a different outcome, but I feel like it will be in some cases. Will test.</p>
-        <p>Dropdown with more combos selectable</p>
+        <p>Dropdown with combo filtering options, and also options to display 1f slower combos if the perfect combos for your distance is something toxic like [0, 0, 3, 4] or something.</p>
         <p>Clear explanation of displayed data</p>
         <p>Auto-scaling for the visualizer (right now it's a static 600px)</p>
     </div>
@@ -22,13 +22,13 @@
             <div class="all-coordinates">
                 <div class="start">
                     <label for="startX" class="coordinate-label">Start X<sub>1</sub>, Z<sub>1</sub></label>
-                    <input type="number" id="startX" class ="coordinate" placeholder="X1...">
-                    <input type="text" id="startZ" class ="coordinate" placeholder="Z1..." oninput="restrictInput(this)">
+                    <input type="number" id="startX" class ="coordinate" placeholder="X1..." oninput="unrestrictInput(this)">
+                    <input type="text" id="startZ" class ="coordinate" placeholder="Z1..." oninput="unrestrictInput(this)">
                 </div>
                 <div class="end">
                     <label for="endX" class="coordinate-label">End X<sub>2</sub>, Z<sub>2</sub></label>
-                    <input type="text" id="endX" class ="coordinate" placeholder="X2..." oninput="restrictInput(this)">
-                    <input type="text" id="endZ" class ="coordinate" placeholder="Z2..."oninput="restrictInput(this)">
+                    <input type="text" id="endX" class ="coordinate" placeholder="X2..." oninput="unrestrictInput(this)">
+                    <input type="text" id="endZ" class ="coordinate" placeholder="Z2..." oninput="unrestrictInput(this)">
                 </div>
             </div>
             <div class="age-standstill-submit">
@@ -46,8 +46,10 @@
             </div>
             <button type="button" id="calculate" onclick="validateInput()">CALCULATE</button>
         </form>
-        <canvas id="even-canvas"></canvas>
-        <canvas id="main-canvas"></canvas>
+        <div id="canvas-container">
+            <canvas id="even-canvas"></canvas>
+            <!-- <canvas id="main-canvas"></canvas> -->
+        </div>
     </div>
     <script type="text/javascript" src="rollcalculator.js"></script>
 </body>
