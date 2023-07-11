@@ -16,18 +16,18 @@ const rollDistancesChild = [
 ];
 
 const rollDistancesChildStandstill = [
-    [116.625, 12], // 12 frames total,  0 frames spacing
-    [116.625, 13], // 13 frames total,  1 frame  spacing
-    [132.000, 14], // 14 frames total,  2 frames spacing
-    [147.375, 15], // 15 frames total,  3 frames spacing
-    [160.500, 16], // 16 frames total,  4 frames spacing
-    [168.750, 17], // 17 frames total,  5 frames spacing
-    [177.000, 18], // 18 frames total,  6 frames spacing
-    [185.250, 19], // 19 frames total,  7 frames spacing
-    [193.500, 20], // 20 frames total,  8 frames spacing
-    [201.750, 21], // 21 frames total,  9 frames spacing
-    [210.000, 22], // 22 frames total, 10 frames spacing
-    [218.250, 23]  // 23 frames total, 11 frames spacing
+    [103.625, 12], // 12 frames total,  0 frames spacing
+    [103.625, 13], // 13 frames total,  1 frame  spacing
+    [119.625, 14], // 14 frames total,  2 frames spacing
+    [135.000, 15], // 15 frames total,  3 frames spacing
+    [148.125, 16], // 16 frames total,  4 frames spacing
+    [156.375, 17], // 17 frames total,  5 frames spacing
+    [164.625, 18], // 18 frames total,  6 frames spacing
+    [172.875, 19], // 19 frames total,  7 frames spacing
+    [181.125, 20], // 20 frames total,  8 frames spacing
+    [189.375, 21], // 21 frames total,  9 frames spacing
+    [197.625, 22], // 22 frames total, 10 frames spacing
+    [205.875, 23]  // 23 frames total, 11 frames spacing
 ];
 
 const rollDistancesAdult = [
@@ -46,18 +46,18 @@ const rollDistancesAdult = [
 ];
 
 const rollDistancesAdultStandstill = [
-    [124.500, 12], // 12 frames total, 0  frames spacing
-    [124.500, 13], // 13 frames total, 1  frame  spacing
-    [144.000, 14], // 14 frames total, 2  frames spacing
-    [160.500, 15], // 15 frames total, 3  frames spacing
-    [174.000, 16], // 16 frames total, 4  frames spacing
-    [183.000, 17], // 17 frames total, 5  frames spacing
-    [192.000, 18], // 18 frames total, 6  frames spacing
-    [201.000, 19], // 19 frames total, 7  frames spacing
-    [210.000, 20], // 20 frames total, 8  frames spacing
-    [219.000, 21], // 21 frames total, 9  frames spacing
-    [228.000, 22], // 22 frames total, 10 frames spacing
-    [237.000, 23]  // 23 frames total, 11 frames spacing
+    [111.000, 12], // 12 frames total, 0  frames spacing
+    [111.000, 13], // 13 frames total, 1  frame  spacing
+    [130.500, 14], // 14 frames total, 2  frames spacing
+    [147.000, 15], // 15 frames total, 3  frames spacing
+    [160.500, 16], // 16 frames total, 4  frames spacing
+    [169.500, 17], // 17 frames total, 5  frames spacing
+    [178.500, 18], // 18 frames total, 6  frames spacing
+    [187.500, 19], // 19 frames total, 7  frames spacing
+    [196.500, 20], // 20 frames total, 8  frames spacing
+    [205.500, 21], // 21 frames total, 9  frames spacing
+    [214.500, 22], // 22 frames total, 10 frames spacing
+    [223.500, 23]  // 23 frames total, 11 frames spacing
 ];
 
 let unfilteredRollsResult = [];
