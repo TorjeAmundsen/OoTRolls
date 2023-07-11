@@ -1,5 +1,6 @@
 :root {
     --canvas-width: 600px;
+    --separator-width: 650px;
 }
 
 body {
@@ -272,4 +273,18 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     appearance: textfield;
     -moz-appearance: textfield;
+}
+
+#separator {
+    width: var(--separator-width);
+    margin: auto;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-top: 6px solid #466da7;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px #000000;
+    outline-style: solid;
+    outline-width: 2px;
+    outline-color: #000000;
 }
