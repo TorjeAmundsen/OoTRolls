@@ -1,3 +1,5 @@
+// Unused file, this is just where I developed the algorithm in isolation from the rest of the code! - Torje
+
 const rollDistancesChild = [
     [118.500, 12], // 12 frames total,  0 frames spacing
     [118.875, 13], // 13 frames total,  1 frame  spacing
@@ -62,6 +64,7 @@ let unfilteredRollsResult = [];
 let comboArray = [];
 let lowestTime = Infinity;
 let calculationsDone = 0;
+
 async function findRolls(rolls, standstillRolls, target, currentDistance, currentCombo, currentTime, startIndex, result, standstill) {
     calculationsDone++;
     if ((currentDistance >= target) && (currentDistance < target + 25)) {
