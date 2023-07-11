@@ -14,8 +14,8 @@ const rollDistancesChild = [
 ];
 
 const rollDistancesChildStandstill = [
-    [103.625, 12], // 12 frames total,  0 frames spacing
-    [103.625, 13], // 13 frames total,  1 frame  spacing
+    [104.250, 12], // 12 frames total,  0 frames spacing
+    [104.250, 13], // 13 frames total,  1 frame  spacing
     [119.625, 14], // 14 frames total,  2 frames spacing
     [135.000, 15], // 15 frames total,  3 frames spacing
     [148.125, 16], // 16 frames total,  4 frames spacing
@@ -135,8 +135,10 @@ let lowestTime = Infinity;
 let pureFilteredCombos = [];
 let filteredCombosData = [];
 let distances = [];
+let rollsLeniency = 0;
+
 function findRolls(rolls, standstillRolls, target, currentDistance, currentCombo, currentTime, startIndex, result, standstill) {
-    if ((currentDistance >= target) && (currentDistance < target + 132)) {
+    if ((currentDistance >= target) && (currentDistance < target + 4.5)) {
         result.push([currentDistance, JSON.parse(JSON.stringify(currentCombo)), currentTime]);
         if (currentTime < lowestTime) {
             lowestTime = currentTime;
@@ -152,7 +154,7 @@ function findRolls(rolls, standstillRolls, target, currentDistance, currentCombo
         if (standstill == true) {
             if (newCombo.length <= 1) {
                 newDist = JSON.parse(JSON.stringify(distances));
-                newDist.push(standstillRolls[i][0])
+                newDist.push(standstillRolls[i][0]);
                 findRolls(
                     rolls, standstillRolls, target,
                     currentDistance + standstillRolls[i][0],
@@ -186,8 +188,29 @@ function resetArrays() {
     filteredCombosData = [];
 };
 
+function filterRolls(leniency, exclusive = false) {
+    pureFilteredCombos = [];
+    filteredCombosData = [];
+    if (!exclusive) {
+        for (let [i, combo] of unfilteredRollsResult.entries()) {
+            if (combo[2] <= lowestTime + leniency) {
+                pureFilteredCombos.push(JSON.parse(JSON.stringify(unfilteredRollsResult[i][1])));
+                filteredCombosData.push(JSON.parse(JSON.stringify(unfilteredRollsResult[i])));
+            };
+        };
+    } else {
+        for (let [i, combo] of unfilteredRollsResult.entries()) {
+            if (combo[2] == lowestTime + leniency) {
+                pureFilteredCombos.push(JSON.parse(JSON.stringify(unfilteredRollsResult[i][1])));
+                filteredCombosData.push(JSON.parse(JSON.stringify(unfilteredRollsResult[i])));
+            };
+        };
+    };
+};
+
 function calculateRolls(x1, z1, x2, z2, fromStandstill, isAdult) {
-    let totalDistance = getDistance(x1, z1, x2, z2);
+    let totalDistance = getDistance(x1, z1, x2, z2) - 6;
+    console.log(totalDistance);
     if (124.5 > totalDistance || totalDistance > 1500) {
         setInputFields(false);
         return;
@@ -204,7 +227,7 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill, isAdult) {
     findRolls(
         rolls           = rolls,
         standstillRolls = standstillRolls,
-        target          = distance,
+        target          = totalDistance,
         currentDistance = 0,
         currentCombo    = comboArray,
         currentTime     = 0,
@@ -213,18 +236,13 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill, isAdult) {
         standstill      = fromStandstill
     );
 
-    for (let [i, combo] of unfilteredRollsResult.entries()) {
-        if (combo[2] == lowestTime/*  || combo[2] == lowestTime + 1 */) {
-            pureFilteredCombos.push(JSON.parse(JSON.stringify(unfilteredRollsResult[i][1])));
-            filteredCombosData.push(JSON.parse(JSON.stringify(unfilteredRollsResult[i])));
-        };
-    };
+    filterRolls(rollsLeniency);
 
     pureFilteredCombos.reverse();
     filteredCombosData.reverse();
 
-    createCanvases(pureFilteredCombos);
-    console.log("Roll combo data: ", filteredCombosData)
+    createCanvases(filteredCombosData);
+    console.log("Roll combo data: ", filteredCombosData);
     console.log("Preferred roll combo: ", pureFilteredCombos.slice(-1));
     console.log("All combos: ", pureFilteredCombos);
 };
@@ -286,7 +304,7 @@ function setInputFields(enabled = false) {
 document.querySelector("body").addEventListener("keypress", function(e) {
     if (e.key === "Enter") {
         validateInput();
-    }
+    };
 });
 
 let resized = false;
@@ -318,23 +336,69 @@ function createCanvases(combos) {
     while (container.hasChildNodes()) {
         container.removeChild(container.firstChild);
     };
-    for (let [i, value] of combos.entries()) {
+    if (rollsLeniency > 0) {
+        for (let [i, value] of combos.entries()) {
+            if (value[2] == lowestTime + rollsLeniency) {
+                container.appendChild(Object.assign(
+                    document.createElement("canvaslabel"), {id : `label-${i}`}
+                ));
+                container.appendChild(Object.assign(
+                    document.createElement("canvas"), { id : `canvas-${i}`, height : "41", width : "600"}
+                ));
+                drawRolls(
+                    rolls   = value[1],
+                    context = document.getElementById(`canvas-${i}`).getContext("2d"),
+                    canvas  = document.getElementById(`canvas-${i}`),
+                    stroke  = true
+                );
+                labelRolls(
+                    data    = filteredCombosData[i],
+                    div     = document.getElementById(`label-${i}`)
+                );
+            };
+        };
         container.appendChild(Object.assign(
-            document.createElement("canvaslabel"), {id : `label-${i}`}
+            document.createElement("hr"), {id : "separator"}
         ));
-        container.appendChild(Object.assign(
-            document.createElement("canvas"), { id : `canvas-${i}`, height : "41", width : "600"}
-        ));
-        drawRolls(
-            rolls   = value,
-            context = document.getElementById(`canvas-${i}`).getContext("2d"),
-            canvas  = document.getElementById(`canvas-${i}`),
-            stroke  = true
-        );
-        labelRolls(
-            data    = filteredCombosData[i],
-            div     = document.getElementById(`label-${i}`)
-        );
+        for (let [i, value] of combos.entries()) {
+            if (value[2] == lowestTime) {
+                container.appendChild(Object.assign(
+                    document.createElement("canvaslabel"), {id : `label-${i+99}`}
+                ));
+                container.appendChild(Object.assign(
+                    document.createElement("canvas"), { id : `canvas-${i+99}`, height : "41", width : "600"}
+                ));
+                drawRolls(
+                    rolls   = value[1],
+                    context = document.getElementById(`canvas-${i+99}`).getContext("2d"),
+                    canvas  = document.getElementById(`canvas-${i+99}`),
+                    stroke  = true
+                );
+                labelRolls(
+                    data    = filteredCombosData[i],
+                    div     = document.getElementById(`label-${i+99}`)
+                );
+            };
+        };
+    } else {
+        for (let [i, value] of combos.entries()) {
+            container.appendChild(Object.assign(
+                document.createElement("canvaslabel"), {id : `label-${i}`}
+            ));
+            container.appendChild(Object.assign(
+                document.createElement("canvas"), { id : `canvas-${i}`, height : "41", width : "600"}
+            ));
+            drawRolls(
+                rolls   = value[1],
+                context = document.getElementById(`canvas-${i}`).getContext("2d"),
+                canvas  = document.getElementById(`canvas-${i}`),
+                stroke  = true
+            );
+            labelRolls(
+                data    = filteredCombosData[i],
+                div     = document.getElementById(`label-${i}`)
+            );
+        };
     };
 };
 
