@@ -84,7 +84,7 @@ const manualColorsArray = [
     "#8d2e99", // 11 spacing, magenta
 ]
 
-async function drawRolls(rolls, context, canvas, stroke = false) {
+function drawRolls(rolls, context, canvas, stroke = false) {
     context.lineWidth = rollStrokeWidth;
     context.strokeStyle = rollStrokeColor;
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -135,7 +135,7 @@ let lowestTime = Infinity;
 let pureFilteredCombos = [];
 let filteredCombosData = [];
 
-async function findRolls(rolls, standstillRolls, target, currentDistance, currentCombo, currentTime, startIndex, result, standstill) {
+function findRolls(rolls, standstillRolls, target, currentDistance, currentCombo, currentTime, startIndex, result, standstill) {
     if ((currentDistance >= target) && (currentDistance < target + 132)) {
         result.push([currentDistance, JSON.parse(JSON.stringify(currentCombo)), currentTime]);
         if (currentTime < lowestTime) {
@@ -176,7 +176,7 @@ async function findRolls(rolls, standstillRolls, target, currentDistance, curren
     };
 };
 
-async function resetArrays() {
+function resetArrays() {
     unfilteredRollsResult = [];
     comboArray = [];
     lowestTime = Infinity;
@@ -184,7 +184,7 @@ async function resetArrays() {
     filteredCombosData = [];
 };
 
-async function calculateRolls(x1, z1, x2, z2, fromStandstill, isAdult) {
+function calculateRolls(x1, z1, x2, z2, fromStandstill, isAdult) {
     let totalDistance = getDistance(x1, z1, x2, z2);
     if (124.5 > totalDistance || totalDistance > 1500) {
         setInputFields(false);
@@ -227,7 +227,7 @@ async function calculateRolls(x1, z1, x2, z2, fromStandstill, isAdult) {
     console.log("All combos: ", pureFilteredCombos);
 };
 
-async function validateInput() {
+function validateInput() {
     let x1          = document.getElementById("startX").value;
     let z1          = document.getElementById("startZ").value;
     let x2          = document.getElementById("endX").value;
@@ -265,7 +265,7 @@ async function validateInput() {
     };
 };
 
-async function setInputFields(enabled = false) {
+function setInputFields(enabled = false) {
     let elements = [
         document.getElementById("startX"),
         document.getElementById("startZ"),
@@ -336,6 +336,6 @@ function createCanvases(combos) {
     };
 };
 
-async function unrestrictInput(field) {
+function unrestrictInput(field) {
     field.classList.remove("invalid-input")
 };
