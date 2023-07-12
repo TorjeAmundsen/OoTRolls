@@ -207,6 +207,8 @@ function filterRolls(leniency, exclusive = false) {
             };
         };
     };
+    pureFilteredCombos.reverse();
+    filteredCombosData.reverse();
 };
 
 function calculateRolls(x1, z1, x2, z2, fromStandstill, isAdult) {
@@ -239,12 +241,9 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill, isAdult) {
 
     filterRolls(rollsLeniency);
 
-    pureFilteredCombos.reverse();
-    filteredCombosData.reverse();
-
     createCanvases(filteredCombosData);
+
     console.log("Roll combo data: ", filteredCombosData);
-    console.log("Preferred roll combo: ", pureFilteredCombos.slice(-1));
     console.log("All combos: ", pureFilteredCombos);
 };
 
@@ -329,15 +328,22 @@ async function toggleIndev(button) {
         button.innerHTML = "Hide upcoming features";
     };
 };
-function labelRolls(data, div) {
-    div.innerHTML = `${data[0].toFixed(3)} units in ${data[2]} frames`
-}
+function labelRolls(data, div, slower = false) {
+    div.innerHTML = `${data[0].toFixed(3)} units in ${data[2]} frames / ${(data[2]/20).toFixed(2)}s`
+    if (slower) {
+        div.innerHTML += " (+1 frame)"
+    };
+};
 function createCanvases(combos) {
     let container = document.getElementById("canvas-container");
     while (container.hasChildNodes()) {
         container.removeChild(container.firstChild);
     };
     container.innerText = `Distance to cover: ${totalDistance.toFixed(3)} units`
+    container.appendChild(Object.assign(
+        document.createElement("button"), {id : "leniency", type : "button", onclick : toggleLeniency}
+    ));
+    document.getElementById("leniency").innerText = "Toggle +1 frame of leniency";
     if (rollsLeniency > 0) {
         for (let [i, value] of combos.entries()) {
             if (value[2] == lowestTime + rollsLeniency) {
@@ -355,7 +361,8 @@ function createCanvases(combos) {
                 );
                 labelRolls(
                     data    = filteredCombosData[i],
-                    div     = document.getElementById(`label-${i}`)
+                    div     = document.getElementById(`label-${i}`),
+                    slower  = true
                 );
             };
         };
@@ -406,4 +413,16 @@ function createCanvases(combos) {
 
 function unrestrictInput(field) {
     field.classList.remove("invalid-input")
+};
+
+function toggleLeniency() {
+    if (rollsLeniency == 0) {
+        rollsLeniency = 1;
+        this.classList.add("on");
+    } else {
+        rollsLeniency = 0;
+        this.classList.remove("on");
+    };
+    filterRolls(rollsLeniency, false);
+    createCanvases(filteredCombosData);
 };
