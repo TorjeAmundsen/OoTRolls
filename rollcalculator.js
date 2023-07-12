@@ -136,9 +136,10 @@ let pureFilteredCombos = [];
 let filteredCombosData = [];
 let distances = [];
 let rollsLeniency = 0;
+let totalDistance = 0;
 
 function findRolls(rolls, standstillRolls, target, currentDistance, currentCombo, currentTime, startIndex, result, standstill) {
-    if ((currentDistance >= target) && (currentDistance < target + 4.5)) {
+    if ((currentDistance >= target) && (currentDistance < target + 132)) {
         result.push([currentDistance, JSON.parse(JSON.stringify(currentCombo)), currentTime]);
         if (currentTime < lowestTime) {
             lowestTime = currentTime;
@@ -209,7 +210,7 @@ function filterRolls(leniency, exclusive = false) {
 };
 
 function calculateRolls(x1, z1, x2, z2, fromStandstill, isAdult) {
-    let totalDistance = getDistance(x1, z1, x2, z2) - 6;
+    totalDistance = getDistance(x1, z1, x2, z2);
     console.log(totalDistance);
     if (124.5 > totalDistance || totalDistance > 1500) {
         setInputFields(false);
@@ -336,6 +337,7 @@ function createCanvases(combos) {
     while (container.hasChildNodes()) {
         container.removeChild(container.firstChild);
     };
+    container.innerText = `Distance to cover: ${totalDistance.toFixed(3)} units`
     if (rollsLeniency > 0) {
         for (let [i, value] of combos.entries()) {
             if (value[2] == lowestTime + rollsLeniency) {
@@ -343,7 +345,7 @@ function createCanvases(combos) {
                     document.createElement("canvaslabel"), {id : `label-${i}`}
                 ));
                 container.appendChild(Object.assign(
-                    document.createElement("canvas"), { id : `canvas-${i}`, height : "41", width : "600"}
+                    document.createElement("canvas"), {id : `canvas-${i}`, height : "41", width : "600"}
                 ));
                 drawRolls(
                     rolls   = value[1],
