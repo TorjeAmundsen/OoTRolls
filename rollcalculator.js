@@ -67,7 +67,6 @@ let textFillColor       = "#000000";
 let canvasFont          = "bold 12px arial, sans-serif";
 let canvasHeight        = 41;
 let canvasWidth         = 600;
-let backgroundColor     = "#12161c";
 
 const manualColorsArray = [
     "#a32727", // 0  spacing, red
@@ -82,7 +81,7 @@ const manualColorsArray = [
     "#4827a3", // 9  spacing, purple
     "#6d27a3", // 10 spacing, purpler
     "#8d2e99", // 11 spacing, magenta
-]
+];
 
 function drawRolls(rolls, context, canvas, stroke = false) {
     context.lineWidth = rollStrokeWidth;
@@ -312,12 +311,13 @@ const root = document.querySelector(':root');
 
 let invis = true;
 
+const delay = (delayInms) => {
+    return new Promise(resolve => setTimeout(resolve, delayInms));
+};
+
 async function toggleIndev(button) {
     classes = document.getElementById("coming").classList;
     invis = !invis;
-    const delay = (delayInms) => {
-        return new Promise(resolve => setTimeout(resolve, delayInms));
-    };
     classes.toggle("invis");
     classes.remove("display-none");
     if (invis) {
@@ -343,7 +343,7 @@ function createCanvases(combos) {
     container.appendChild(Object.assign(
         document.createElement("button"), {id : "leniency", type : "button", onclick : toggleLeniency}
     ));
-    document.getElementById("leniency").innerText = "Toggle +1 frame of leniency";
+    document.getElementById("leniency").innerText = "Add 1 frame of leniency";
     if (rollsLeniency > 0) {
         for (let [i, value] of combos.entries()) {
             if (value[2] == lowestTime + rollsLeniency) {
@@ -351,7 +351,7 @@ function createCanvases(combos) {
                     document.createElement("canvaslabel"), {id : `label-${i}`}
                 ));
                 container.appendChild(Object.assign(
-                    document.createElement("canvas"), {id : `canvas-${i}`, height : "41", width : "600"}
+                    document.createElement("canvas"), {id : `canvas-${i}`, height : "41", width : "600", className : "leniency-visualized"}
                 ));
                 drawRolls(
                     rolls   = value[1],
@@ -415,14 +415,39 @@ function unrestrictInput(field) {
     field.classList.remove("invalid-input")
 };
 
-function toggleLeniency() {
+let leniencyClass = "";
+
+async function toggleLeniency() {
     if (rollsLeniency == 0) {
         rollsLeniency = 1;
-        this.classList.add("on");
     } else {
         rollsLeniency = 0;
-        this.classList.remove("on");
     };
+    
     filterRolls(rollsLeniency, false);
     createCanvases(filteredCombosData);
+    toggleLeniencyClass();
+    console.log(rollsLeniency, leniencyClass);
 };
+
+function toggleLeniencyClass() {
+    let element = document.getElementById("leniency");
+    if (rollsLeniency == 1) {
+        element.classList.add("on");
+        element.innerText = "Remove 1 frame of leniency";
+    } else {
+        element.classList.remove("on");
+    };
+};
+
+function isScrollable() {
+    return document.documentElement.scrollHeight > document.documentElement.clientHeight;
+};
+
+window.addEventListener('resize', function() {
+    if (isScrollable()) {
+        document.body.classList.add("scrollable");
+    } else {
+        document.body.classList.remove("scrollable");
+    };
+});
