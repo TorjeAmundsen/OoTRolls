@@ -13,13 +13,16 @@ body {
     width: 99.70vw;
 }
 
-#indev {
-    position: absolute;
-    width: 12rem;
-    font-size: 16px;
+#buttoncontainer {
+    width: var(--canvas-width);
     margin: auto;
-    margin-top: 0.25rem;
-    margin-left: 0.8rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+}
+
+#indev {
+    width: 10rem;
+    font-size: 16px;
     height: 2rem;
     border: none;
     border-radius: 6px;
@@ -29,42 +32,56 @@ body {
     transition: 120ms;
     background-color: #11171f;
     color: #98c8df;
+    margin-left: 7.25rem;
 }
 
-#indev:hover {
+#indev:hover, #howto:hover {
     outline: #314c6d 2px solid;
     box-shadow: 0px 0px 5px rgb(111, 150, 182);
     background-color: #161d27;
 }
 
-#indev:active {
+#indev:active, #howto:active {
     transform: scale(98%);
 }
 
-.container {
-    margin: 1rem;
-    padding: 2rem;
+#howto {
+    float: right;
+    width: 10rem;
+    font-size: 16px;
+    margin: auto;
+    margin-top: 0;
+    height: 2rem;
+    border: none;
+    border-radius: 6px;
+    outline-style: solid;
+    outline-width: 2px;
+    outline-color: #1f2b3a;
+    transition: 120ms;
+    background-color: #11171f;
+    color: #98c8df;
+    margin-right: 7.25rem;
 }
 
-.coming {
-    display: block;
+.container {
+    margin: 0.5rem;
+    padding-bottom: 2rem;
+}
+
+.coming, .instructions {
     position:absolute;
-    margin-left: 0.7rem;
-    margin-top: 3rem;
+    margin-top: 0.6rem;
     padding-left: 8px;
     padding-right: 8px;
-    width: 28rem;
-    transition: 100ms;
+    width: 600px;
     border-radius: 0.5rem;
-    border-width: 2px;
-    border-style: solid;
-    border-color: #171d25;
-    background-color: #11171f;
+    border-style: none;
+    outline-color: #171d25;
+    outline-style: solid;
+    outline-width: 2px;
+    background-color: rgba(10, 12, 15, 0.8);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-
-.coming.invis {
-    opacity: 0%;
+    backdrop-filter: blur(8px);
 }
 
 .display-none {
@@ -78,6 +95,7 @@ body {
 .form {
     margin: auto;
     margin-bottom: 1.5rem;
+    margin-top: 0;
     width: 21rem;
     padding: 1rem;
     border-radius: 0.5rem;
@@ -294,21 +312,16 @@ input[type=number] {
     outline-color: #000000;
 }
 
+#distancecontainer {
+    display: flex;
+    justify-content: space-between;
+    width: var(--canvas-width);
+    margin: auto;
+}
+
 #distance {
-    display: block;
-    position:absolute;
-    margin-left: 0.7rem;
-    margin-top: 3rem;
-    padding-left: 8px;
-    padding-right: 8px;
-    width: 28rem;
-    transition: 100ms;
-    border-radius: 0.5rem;
-    border-width: 2px;
-    border-style: solid;
-    border-color: #171d25;
-    background-color: #11171f;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    width: 16rem;
+    margin-top: 0.35rem;
 }
 
 #leniency {
@@ -326,8 +339,7 @@ input[type=number] {
     color: #98c8df;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
     transition: 120ms;
-    float: right;
-    transition: 100ms;
+    align-self: flex-end;
 }
 
 #leniency.on {
@@ -351,7 +363,7 @@ input[type=number] {
 }
 
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.75);
+    -webkit-box-shadow: inset 0 0 10px rgba(1, 4, 12, 0.75);
 }
 
 ::-webkit-scrollbar {
@@ -368,4 +380,23 @@ input[type=number] {
 	border-radius: 3px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 	background-color:#1f2b3a;
+}
+
+.solid {
+    height: 2px;
+    background-color: #171d25;
+    color: #171d25;
+    border-width: 0;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 6px;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16px;
 }

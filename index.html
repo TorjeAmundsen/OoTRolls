@@ -4,18 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/calc/calc.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <title>OoT Roll Calculator</title>
 </head>
 <body>
-    <button id="indev" class="indev" onclick="toggleIndev(this)">Show upcoming features</button>
-    <div class="coming invis display-none" id="coming">
-        <p>Features in development:</p>
-        <p>Initial speed input</p>
-        <p>(Right now, unchecking standstill means you're starting from the end of a roll, not full walking speed)</p>
-        <p>Loading zone touch (gaining control not important). I don't even know if this would be a different outcome, but I feel like it will be in some cases. Will test.</p>
-        <p>(ALMOST DONE) Dropdown with combo filtering options, and also options to display 1f slower combos if the perfect combos for your distance is something toxic like [0, 0, 3, 4] or something</p>
-        <p>Clear explanation of displayed data</p>
-        <p>Auto-scaling for the visualizer (right now it's a static 600px)</p>
+    <div id="buttoncontainer" class="button-container">
+        <button id="indev" class="indev" onclick="toggleIndev()">Upcoming Features</button>
+        <button id="howto" class="howto" onclick="toggleInstructions()">Instructions</button>
+        <div id="coming" class="coming display-none">
+            <p>Features in development:</p>
+            <p>Initial speed input</p>
+            <p>(Right now, unchecking standstill means you're starting from the end of a roll, not full walking speed)</p>
+            <p>Loading zone touch (gaining control not important). I don't even know if this would be a different outcome, but I feel like it will be in some cases. Will test.</p>
+            <p>Dropdown with combo filtering options</p>
+            <p>Clear explanation of displayed data</p>
+            <p>Auto-scaling for the visualizer (right now it's a static 600px)</p>
+            <p>SLOPES!! I'm doing a bunch of math to figure out exactly how much certain slopes slow Link down, hopefully it turns out to work well</p>
+        </div>
+        <div id="instructions" class="instructions display-none">
+            <h2>Coordinates</h2>
+            <p>Use coordinates for your X and Z position from gz.</p>
+            <p>The watch addresses for version 1.2 (VC) are:</p>
+            <ul>
+                <li>X 0x801db314 f32</li>
+                <li>Z 0x801db31c f32</li>
+            </ul>
+            <p>Y coordinate is irrelevant. If you are moving on a slope that doesn't slow down Link at all (moving down a slope or moving up a slope that isn't steep enough to affect your speed), you don't need the elevation, as the movement is identical to movement on a non-sloped surface.</p>
+            <p>If you're moving up a slope that slows Link down, then this calculator will not work (yet).</p>
+            <h2>From Standstill</h1>
+            <p>The "From Standstill" option should be checked if you are starting your first roll from 0 speed.</p>
+            <p>If you already have full walking speed, do a roll immediately, and 12 frames after your roll input (The moment you can roll again), use those coordinates as your starting position. This frame happens on the frame before your speed drops at the end of a roll.</p>
+            <hr class="solid">
+            <h2>Reading the data</h2>
+            <p>The visualized roll spacing will have a number attached to each section, where each section represents one roll.</p>
+            <p>The number represents how many frames you delay your roll by after gaining control.</p>
+            <p>0 means you roll instantly. After a roll, this is the frame before your speed value drops.</p>
+            <p>4 is what is normally considered "perfect" spacing, as it has the highest units traveled per frame of any roll timing.</p>
+        </div>
     </div>
     <div class="container" id="container">
         <form class="form">
@@ -34,7 +61,7 @@
             <div class="age-standstill-submit">
                 <div class="standstill-container">
                     <input type="checkbox" id="standstill" class="standstill">
-                    <label for="standstill">From standstill?</label>
+                    <label for="standstill">From standstill</label>
                 </div>
                 <div class="age-selector">
                     <label for="age" class="age-label">Age</label>
