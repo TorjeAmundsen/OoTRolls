@@ -309,25 +309,58 @@ document.querySelector("body").addEventListener("keypress", function(e) {
 let resized = false;
 const root = document.querySelector(':root');
 
-let invis = true;
+let indevInvis = true;
+let instructionsInvis = true;
 
 const delay = (delayInms) => {
     return new Promise(resolve => setTimeout(resolve, delayInms));
 };
 
-async function toggleIndev(button) {
+async function toggleIndev(calledByOther = false) {
     classes = document.getElementById("coming").classList;
-    invis = !invis;
-    classes.toggle("invis");
-    classes.remove("display-none");
-    if (invis) {
-        button.innerHTML = "Show upcoming features";
-        await delay(100);
-        classes.add("display-none");
-    } else {
-        button.innerHTML = "Hide upcoming features";
+    indevInvis = !indevInvis;
+    classes.toggle("display-none");
+    displayNone(classes, indevInvis);
+    if (!(instructionsInvis || calledByOther)) {
+        toggleInstructions(true);
     };
 };
+
+async function toggleInstructions(calledByOther = false) {
+    classes = document.getElementById("instructions").classList;
+    instructionsInvis = !instructionsInvis;
+    classes.toggle("display-none");
+    displayNone(classes, instructionsInvis);
+    if (!(indevInvis || calledByOther)) {
+        toggleIndev(true);
+    };
+};
+
+async function toggleMenu(identifier) {
+    let classes = document.getElementById(identifier).classList;
+    classes.toggle("invis");
+    classes.remove("display-none");
+    if (identifier == "instructions") {
+        indevInvis = true;
+        instructionsInvis = !instructionsInvis;
+        displayNone(classes, instructionsInvis)
+    } else if (identifier == "coming") {
+        instructionsInvis = true;
+        indevInvis = !indevInvis;
+        displayNone(classes, indevInvis)
+    };
+};
+
+async function displayNone(classes, state) {
+    if (state) {
+        await delay(100);
+        classes.add("display-none");
+    };
+};
+
+function toggleHelper() {
+
+}
 function labelRolls(data, div, slower = false) {
     div.innerHTML = `${data[0].toFixed(3)} units in ${data[2]} frames / ${(data[2]/20).toFixed(2)}s`
     if (slower) {
@@ -339,8 +372,15 @@ function createCanvases(combos) {
     while (container.hasChildNodes()) {
         container.removeChild(container.firstChild);
     };
-    container.innerText = `Distance to cover: ${totalDistance.toFixed(3)} units`
     container.appendChild(Object.assign(
+        document.createElement("div"), {id : "distancecontainer"}
+    ));
+    let distContainer = document.getElementById("distancecontainer");
+    distContainer.appendChild(Object.assign(
+        document.createElement("div"), {id : "distance"}
+    ));
+    document.getElementById("distance").innerText = `Distance to cover: ${totalDistance.toFixed(3)} units`
+    distContainer.appendChild(Object.assign(
         document.createElement("button"), {id : "leniency", type : "button", onclick : toggleLeniency}
     ));
     document.getElementById("leniency").innerText = "Add 1 frame of leniency";
