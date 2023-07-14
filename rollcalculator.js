@@ -466,7 +466,7 @@ function scaleElements() {
             canvasWidth = window.innerWidth-32;
             createCanvases(filteredCombosData);
         };
-        root.style.setProperty("--canvas-width", `${window.innerWidth-32}px`);
+        root.style.setProperty("--canvas-width", `${window.innerWidth-40}px`);
         root.style.setProperty("--overlay-width", `${window.innerWidth-44}px`);
         root.style.setProperty("--button-container-margin", `${116 - ((632 - window.innerWidth) / 2)}px`);
     } else {
