@@ -463,12 +463,12 @@ function scaleElements() {
     let root = document.querySelector(":root");
     if (window.innerWidth < 640){
         if (lowestTime < 999) {
-            canvasWidth = window.innerWidth-32;
+            canvasWidth = window.innerWidth-40;
             createCanvases(filteredCombosData);
         };
         root.style.setProperty("--canvas-width", `${window.innerWidth-40}px`);
         root.style.setProperty("--overlay-width", `${window.innerWidth-44}px`);
-        root.style.setProperty("--button-container-margin", `${116 - ((632 - window.innerWidth) / 2)}px`);
+        root.style.setProperty("--button-container-margin", `${116 - ((640 - window.innerWidth) / 2)}px`);
     } else {
         root.style.setProperty("--canvas-width", "600px");
         root.style.setProperty("--overlay-width", "588px");
