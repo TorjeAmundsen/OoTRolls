@@ -1,6 +1,8 @@
 :root {
     --canvas-width: 600px;
     --separator-width: 600px;
+    --overlay-width: 588px;
+    --button-container-margin: 116px;
 }
 
 body {
@@ -29,19 +31,20 @@ body {
     outline-style: solid;
     outline-width: 2px;
     outline-color: #1f2b3a;
-    transition: 120ms;
     background-color: #11171f;
     color: #98c8df;
-    margin-left: 7.25rem;
+    margin-left: var(--button-container-margin);
 }
 
 #indev:hover, #howto:hover {
+    transition: 120ms;
     outline: #314c6d 2px solid;
     box-shadow: 0px 0px 5px rgb(111, 150, 182);
     background-color: #161d27;
 }
 
 #indev:active, #howto:active {
+    transition: 120ms;
     transform: scale(98%);
 }
 
@@ -57,10 +60,9 @@ body {
     outline-style: solid;
     outline-width: 2px;
     outline-color: #1f2b3a;
-    transition: 120ms;
     background-color: #11171f;
     color: #98c8df;
-    margin-right: 7.25rem;
+    margin-right: var(--button-container-margin);
 }
 
 .container {
@@ -73,7 +75,7 @@ body {
     margin-top: 0.6rem;
     padding-left: 8px;
     padding-right: 8px;
-    width: 588px;
+    width: var(--overlay-width);
     border-radius: 0.5rem;
     border-style: none;
     outline-color: #171d25;

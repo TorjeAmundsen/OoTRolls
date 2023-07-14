@@ -306,7 +306,6 @@ document.querySelector("body").addEventListener("keypress", function(e) {
     };
 });
 
-let resized = false;
 const root = document.querySelector(':root');
 
 let indevInvis = true;
@@ -336,31 +335,12 @@ async function toggleInstructions(calledByOther = false) {
     };
 };
 
-async function toggleMenu(identifier) {
-    let classes = document.getElementById(identifier).classList;
-    classes.toggle("invis");
-    classes.remove("display-none");
-    if (identifier == "instructions") {
-        indevInvis = true;
-        instructionsInvis = !instructionsInvis;
-        displayNone(classes, instructionsInvis)
-    } else if (identifier == "coming") {
-        instructionsInvis = true;
-        indevInvis = !indevInvis;
-        displayNone(classes, indevInvis)
-    };
-};
-
 async function displayNone(classes, state) {
     if (state) {
-        await delay(100);
         classes.add("display-none");
     };
 };
 
-function toggleHelper() {
-
-}
 function labelRolls(data, div, slower = false) {
     div.innerHTML = `${data[0].toFixed(3)} units in ${data[2]} frames / ${(data[2]/20).toFixed(2)}s`
     if (slower) {
@@ -435,7 +415,7 @@ function createCanvases(combos) {
                 document.createElement("canvaslabel"), {id : `label-${i}`}
             ));
             container.appendChild(Object.assign(
-                document.createElement("canvas"), { id : `canvas-${i}`, height : "41", width : "600"}
+                document.createElement("canvas"), { id : `canvas-${i}`, height : "41", width : canvasWidth.toString()}
             ));
             drawRolls(
                 rolls   = value[1],
@@ -463,7 +443,6 @@ async function toggleLeniency() {
     } else {
         rollsLeniency = 0;
     };
-    
     filterRolls(rollsLeniency, false);
     createCanvases(filteredCombosData);
     toggleLeniencyClass();
@@ -480,14 +459,66 @@ function toggleLeniencyClass() {
     };
 };
 
-function isScrollable() {
-    return document.documentElement.scrollHeight > document.documentElement.clientHeight;
+function scaleElements() {
+    let root = document.querySelector(":root");
+    if (window.innerWidth < 640){
+        if (lowestTime < 999) {
+            canvasWidth = window.innerWidth-32;
+            createCanvases(filteredCombosData);
+        };
+        root.style.setProperty("--canvas-width", `${window.innerWidth-32}px`);
+        root.style.setProperty("--overlay-width", `${window.innerWidth-44}px`);
+        root.style.setProperty("--button-container-margin", `${116 - ((632 - window.innerWidth) / 2)}px`);
+    } else {
+        root.style.setProperty("--canvas-width", "600px");
+        root.style.setProperty("--overlay-width", "588px");
+        root.style.setProperty("--button-container-margin", "116px");
+        canvasWidth = 600;
+    };
 };
 
 window.addEventListener('resize', function() {
-    if (isScrollable()) {
-        document.body.classList.add("scrollable");
-    } else {
-        document.body.classList.remove("scrollable");
-    };
+    scaleElements();
 });
+
+window.addEventListener("load", (event) => {
+    scaleElements();
+});
+
+/* 
+TODO LIST
+
+Metronome
+    Audio file with click/tap whatever sound
+    Assign each combo a per roll value and loop on a button press
+    Play button next to canvases created through loop with ID equivalent of combo position in sorted list (tricky with the 1 frame leniency ones)
+
+
+Memoization
+    ???
+
+
+Individual frame data for each roll distance (zzzz)
+    Not hard, just tedious af to collect and I am piss lazy lol
+
+
+Initial speed input
+    This depends on individual frame data for each roll distance to work properly, so I need to finish that before I do this
+
+
+Slope calculation
+    I need to port all the trig the game does on in-game slopes to calculate exactly how much Link is slowed down by each frame
+    This also depends on individual frame data for each roll distance to work properly
+
+
+Code cleanup
+    Very messy rn, I want to rearrange functions into relevant sections, as well as add comments throughout my code so it's easier to read
+
+
+Theme switcher??
+    Light mode, potentially color blind friendly options for visualization. Not really a priority.
+
+
+- Torje
+
+*/
