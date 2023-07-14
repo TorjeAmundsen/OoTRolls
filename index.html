@@ -19,12 +19,14 @@
             <p>(Right now, unchecking standstill means you're starting from the end of a roll, not full walking speed)</p>
             <p>Loading zone touch (gaining control not important). I don't even know if this would be a different outcome, but I feel like it will be in some cases. Will test.</p>
             <p>Dropdown with combo filtering options</p>
-            <p>Auto-scaling for the visualizer (right now it's a static 600px)</p>
             <p>SLOPES!! I'm doing a bunch of math to figure out exactly how much certain slopes slow Link down, hopefully it turns out to work well</p>
+            <p>Metronome playback at any given roll combo's rhythm</p>
+            <p>Theme switcher (light mode, colorblind settings for the visualization etc.)</p>
+            <p>Memozation to optimize the exhaustive depth-first search that drives the calculator</p>
         </div>
         <div id="instructions" class="instructions display-none">
-            <h2>Coordinates</h2>
-            <p>Use coordinates for your X and Z position from gz.</p>
+            <h2>Coordinate input</h2>
+            <p>Only use the coordinates for your X and Z position from gz.</p>
             <p>The watch addresses for version 1.2 (VC) are:</p>
             <ul>
                 <li>X 0x801db314 f32</li>
@@ -33,8 +35,8 @@
             <p>Y coordinate is irrelevant. If you are moving on a slope that doesn't slow down Link at all (moving down a slope or moving up a slope that isn't steep enough to affect your speed), you don't need the elevation, as the movement is identical to movement on a non-sloped surface.</p>
             <p>If you're moving up a slope that slows Link down, then this calculator will not work (yet).</p>
             <hr class="solid">
-            <h2>From Standstill</h1>
-            <p>The "From Standstill" option should be checked if you are starting your first roll from 0 speed.</p>
+            <h2>From standstill</h1>
+            <p>The "From standstill" option should be checked if you are starting your first roll from 0 speed.</p>
             <p>If you already have full walking speed, do a roll immediately, and 12 frames after your roll input (The moment you can roll again), use those coordinates as your starting position. This frame happens on the frame before your speed drops at the end of a roll.</p>
             <hr class="solid">
             <h2>Reading the data</h2>
