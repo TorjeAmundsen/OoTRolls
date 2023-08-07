@@ -143,6 +143,7 @@ function findRolls(rolls, standstillRolls, target, currentDistance, currentCombo
         if (currentTime < lowestTime) {
             lowestTime = currentTime;
         };
+        return;
     };
     if (startIndex == rolls.length || currentCombo.length > Math.floor(target / rolls[0][0])) {
         currentCombo.pop();
@@ -213,8 +214,11 @@ function filterRolls(leniency, exclusive = false) {
 function calculateRolls(x1, z1, x2, z2, fromStandstill, isAdult) {
     totalDistance = getDistance(x1, z1, x2, z2);
     console.log(totalDistance);
-    if (124.5 > totalDistance || totalDistance > 1500) {
+    if (124.5 > totalDistance || totalDistance >= 1200) {
         setInputFields(false);
+        if (totalDistance >= 1200) {
+            backwalkPlease();
+        };
         return;
     };
     setInputFields(true);
@@ -226,6 +230,7 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill, isAdult) {
         standstillRolls = rollDistancesAdultStandstill;
     };
     resetArrays();
+    let startTime = performance.now();
     findRolls(
         rolls           = rolls,
         standstillRolls = standstillRolls,
@@ -240,10 +245,13 @@ function calculateRolls(x1, z1, x2, z2, fromStandstill, isAdult) {
 
     filterRolls(rollsLeniency);
 
+    let endTime = performance.now();
+
     createCanvases(filteredCombosData);
 
     console.log("Roll combo data: ", filteredCombosData);
     console.log("All combos: ", pureFilteredCombos);
+    console.log(`Calculation took ${((endTime - startTime)/1000).toFixed(3)}s`)
 };
 
 function validateInput() {
@@ -347,6 +355,17 @@ function labelRolls(data, div, slower = false) {
         div.innerHTML += " (+1 frame)"
     };
 };
+
+function backwalkPlease() {
+    let container = document.getElementById("canvas-container");
+    while (container.hasChildNodes()) {
+        container.removeChild(container.firstChild);
+    };
+    container.appendChild(Object.assign(
+        document.createElement("iframe"), {id : "ytembed", width : "600", height: "338", src : "https://www.youtube.com/embed/IjmeBBHVnTc"}
+    ));
+};
+
 function createCanvases(combos) {
     let container = document.getElementById("canvas-container");
     while (container.hasChildNodes()) {
@@ -364,6 +383,12 @@ function createCanvases(combos) {
         document.createElement("button"), {id : "leniency", type : "button", onclick : toggleLeniency}
     ));
     document.getElementById("leniency").innerText = "Add 1 frame of leniency";
+    if (totalDistance >= 850) {
+        container.appendChild(Object.assign(
+            document.createElement("div"), {id : "backwalksmall"}
+        ));
+        document.getElementById("backwalksmall").innerText = "(You should probably backwalk this distance lol)";
+    };
     if (rollsLeniency > 0) {
         for (let [i, value] of combos.entries()) {
             if (value[2] == lowestTime + rollsLeniency) {
@@ -371,7 +396,7 @@ function createCanvases(combos) {
                     document.createElement("canvaslabel"), {id : `label-${i}`}
                 ));
                 container.appendChild(Object.assign(
-                    document.createElement("canvas"), {id : `canvas-${i}`, height : "41", width : "600", className : "leniency-visualized"}
+                    document.createElement("canvas"), {id : `canvas-${i}`, height : "41", width : canvasWidth.toString(), className : "leniency-visualized"}
                 ));
                 drawRolls(
                     rolls   = value[1],
@@ -395,7 +420,7 @@ function createCanvases(combos) {
                     document.createElement("canvaslabel"), {id : `label-${i+99}`}
                 ));
                 container.appendChild(Object.assign(
-                    document.createElement("canvas"), { id : `canvas-${i+99}`, height : "41", width : "600"}
+                    document.createElement("canvas"), { id : `canvas-${i+99}`, height : "41", width : canvasWidth.toString()}
                 ));
                 drawRolls(
                     rolls   = value[1],
@@ -435,8 +460,6 @@ function unrestrictInput(field) {
     field.classList.remove("invalid-input")
 };
 
-let leniencyClass = "";
-
 async function toggleLeniency() {
     if (rollsLeniency == 0) {
         rollsLeniency = 1;
@@ -446,7 +469,6 @@ async function toggleLeniency() {
     filterRolls(rollsLeniency, false);
     createCanvases(filteredCombosData);
     toggleLeniencyClass();
-    console.log(rollsLeniency, leniencyClass);
 };
 
 function toggleLeniencyClass() {
