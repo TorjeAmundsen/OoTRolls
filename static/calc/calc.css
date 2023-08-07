@@ -1,5 +1,5 @@
 :root {
-    --canvas-width: 600px;
+    --canvas-width: 500px;
     --separator-width: 600px;
     --overlay-width: 588px;
     --button-container-margin: 116px;
@@ -401,4 +401,19 @@ li {
     margin-bottom: 4px;
     font-family: 'Press Start 2P', cursive;
     font-size: 16px;
+}
+
+#backwalksmall {
+    font-size: 12px;
+    color: rgb(175, 21, 21);
+    text-shadow: 0px 0px 7px rgb(88, 16, 16);
+}
+
+#ytembed {
+    outline-style: solid;
+    outline-width: 2px;
+    border-style: none;
+    border-radius: 6px;
+    outline-color: #1f2b3a;
+    background-color: #11171f;
 }
