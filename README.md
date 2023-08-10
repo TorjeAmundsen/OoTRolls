@@ -2,8 +2,10 @@
 
 In a lot of situations, Ocarina of Time speedruns rely on rolling to travel from point A to point B as fast as possible.
 
-![lw](https://github.com/TorjeAmundsen/OoTRolls/assets/14235956/8e4b81eb-47b9-4afe-add7-cf717bc1be6f)
-![ganon](https://github.com/TorjeAmundsen/OoTRolls/assets/14235956/0a412983-243e-4eb7-a079-369acbad45e3)
+![lw](https://github.com/TorjeAmundsen/OoTRolls/assets/14235956/d0136e95-ecf1-4a95-84df-4907f6cbc110)
+![ganon](https://github.com/TorjeAmundsen/OoTRolls/assets/14235956/a263c9ef-050b-429c-813a-08ef9359433b)
+
+
 
 However, the way Link accelerates varies quite a bit depending on how you space your rolls, aka how many frames you spend walking inbetween each individual roll.
 
