@@ -1,5 +1,5 @@
 # Ocarina of Time Roll Spacing Calculator
-### [Link to Webapp (GitHub Pages)](torjeamundsen.github.io/OoTRolls/)
+### [Link to Webapp (GitHub Pages)](https://torjeamundsen.github.io/OoTRolls/)
 # What is this?
 In a lot of situations, Ocarina of Time speedruns rely on rolling to travel from point A to point B as fast as possible.
 
