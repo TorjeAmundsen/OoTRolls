@@ -12,7 +12,7 @@ body {
     font-size: 16px;
     overflow-x: hidden;
     margin: 0;
-    width: 99.70vw;
+    width: 99.7vw;
 }
 
 #buttoncontainer {
@@ -36,14 +36,16 @@ body {
     margin-left: var(--button-container-margin);
 }
 
-#indev:hover, #howto:hover {
+#indev:hover,
+#howto:hover {
     transition: 120ms;
     outline: #314c6d 2px solid;
     box-shadow: 0px 0px 5px rgb(111, 150, 182);
     background-color: #161d27;
 }
 
-#indev:active, #howto:active {
+#indev:active,
+#howto:active {
     transition: 120ms;
     transform: scale(98%);
 }
@@ -70,11 +72,11 @@ body {
     padding-bottom: 2rem;
 }
 
-.coming, .instructions {
-    position:absolute;
+.coming,
+.instructions {
+    position: absolute;
     margin-top: 0.6rem;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding: 1em;
     width: var(--overlay-width);
     border-radius: 0.5rem;
     border-style: none;
@@ -90,7 +92,7 @@ body {
     display: none;
 }
 
-::selection{
+::selection {
     background: #244b7a;
 }
 
@@ -108,11 +110,11 @@ body {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.coordinate {    
+.coordinate {
     width: 6rem;
     height: 1.25rem;
     margin: 5px;
-    margin-bottom:8px;
+    margin-bottom: 8px;
     font-size: 16px;
     outline-style: solid;
     outline-width: 2px;
@@ -144,7 +146,8 @@ body {
     width: 84px;
 }
 
-.start, .end {
+.start,
+.end {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -202,9 +205,7 @@ body {
     outline-color: #1f2b3a;
 }
 
-.standstill-container
-
-input[type="checkbox"] {
+.standstill-container input[type="checkbox"] {
     width: 12px;
     height: 13px;
     border-style: none;
@@ -238,18 +239,16 @@ input[type="checkbox"] {
     transform: scale(98%);
 }
 
-canvas {
-    display: none;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 1rem;
-    height: 41px;
-    width: var(--canvas-width);
+.rolls-container {
+    display: flex;
+    padding: 0.5em;
     border-radius: 5px;
     border-width: 2px;
     border-color: black;
     border-style: solid;
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    box-shadow:
+        rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+        rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 
 canvaslabel {
@@ -295,7 +294,7 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
-input[type=number] {
+input[type="number"] {
     appearance: textfield;
     -moz-appearance: textfield;
 }
@@ -369,19 +368,19 @@ input[type=number] {
 }
 
 ::-webkit-scrollbar {
-	width: 6px;
-	background-color: #0d1117;
+    width: 6px;
+    background-color: #0d1117;
 }
 
 ::-webkit-scrollbar-thumb {
-	border-radius: 3px;
-	background-color:#1f2b3b;
+    border-radius: 3px;
+    background-color: #1f2b3b;
 }
 
 .scrollable::-webkit-scrollbar-thumb {
-	border-radius: 3px;
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color:#1f2b3a;
+    border-radius: 3px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #1f2b3a;
 }
 
 .solid {
@@ -399,7 +398,7 @@ ul {
 li {
     margin-top: 4px;
     margin-bottom: 4px;
-    font-family: 'Press Start 2P', cursive;
+    font-family: "Press Start 2P", cursive;
     font-size: 16px;
 }
 
@@ -416,4 +415,27 @@ li {
     border-radius: 6px;
     outline-color: #1f2b3a;
     background-color: #11171f;
+}
+
+.roll-element {
+    height: 2em;
+    outline: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    > div {
+        font-weight: bold;
+        text-shadow:
+            black 1px 0 0,
+            black 1px 1px 0,
+            black 0 1px 0,
+            black -1px 1px 0,
+            black -1px 0 0,
+            black -1px -1px 0,
+            black 0px -1px 0,
+            black 1px -1px 0,
+            rgba(133, 195, 255, 0.5) 0 0 10px,
+            black 0 0 4px;
+        color: white;
+    }
 }

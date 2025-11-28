@@ -1,7 +1,7 @@
 const rollDistancesChild = [
-    [118.500, 12], // 12 frames total,  0 frames spacing
+    [118.5, 12], // 12 frames total,  0 frames spacing
     [118.875, 13], // 13 frames total,  1 frame  spacing
-    [134.250, 14], // 14 frames total,  2 frames spacing
+    [134.25, 14], // 14 frames total,  2 frames spacing
     [149.625, 15], // 15 frames total,  3 frames spacing
     [161.625, 16], // 16 frames total,  4 frames spacing
     [169.875, 17], // 17 frames total,  5 frames spacing
@@ -10,14 +10,14 @@ const rollDistancesChild = [
     [194.625, 20], // 20 frames total,  8 frames spacing
     [202.875, 21], // 21 frames total,  9 frames spacing
     [211.125, 22], // 22 frames total, 10 frames spacing
-    [219.375, 23]  // 23 frames total, 11 frames spacing
+    [219.375, 23], // 23 frames total, 11 frames spacing
 ];
 
 const rollDistancesChildStandstill = [
-    [104.250, 12], // 12 frames total,  0 frames spacing
-    [104.250, 13], // 13 frames total,  1 frame  spacing
+    [104.25, 12], // 12 frames total,  0 frames spacing
+    [104.25, 13], // 13 frames total,  1 frame  spacing
     [119.625, 14], // 14 frames total,  2 frames spacing
-    [135.000, 15], // 15 frames total,  3 frames spacing
+    [135.0, 15], // 15 frames total,  3 frames spacing
     [148.125, 16], // 16 frames total,  4 frames spacing
     [156.375, 17], // 17 frames total,  5 frames spacing
     [164.625, 18], // 18 frames total,  6 frames spacing
@@ -25,48 +25,50 @@ const rollDistancesChildStandstill = [
     [181.125, 20], // 20 frames total,  8 frames spacing
     [189.375, 21], // 21 frames total,  9 frames spacing
     [197.625, 22], // 22 frames total, 10 frames spacing
-    [205.875, 23]  // 23 frames total, 11 frames spacing
+    [205.875, 23], // 23 frames total, 11 frames spacing
 ];
 
 const rollDistancesAdult = [
-    [132.000, 12], // 12 frames total, 0  frames spacing
-    [133.500, 13], // 13 frames total, 1  frame  spacing
-    [150.000, 14], // 14 frames total, 2  frames spacing
-    [166.500, 15], // 15 frames total, 3  frames spacing
-    [178.500, 16], // 16 frames total, 4  frames spacing
-    [187.500, 17], // 17 frames total, 5  frames spacing
-    [196.500, 18], // 18 frames total, 6  frames spacing
-    [205.500, 19], // 19 frames total, 7  frames spacing
-    [214.500, 20], // 20 frames total, 8  frames spacing
-    [223.500, 21], // 21 frames total, 9  frames spacing
-    [232.500, 22], // 22 frames total, 10 frames spacing
-    [241.500, 23]  // 23 frames total, 11 frames spacing
+    [132.0, 12], // 12 frames total, 0  frames spacing
+    [133.5, 13], // 13 frames total, 1  frame  spacing
+    [150.0, 14], // 14 frames total, 2  frames spacing
+    [166.5, 15], // 15 frames total, 3  frames spacing
+    [178.5, 16], // 16 frames total, 4  frames spacing
+    [187.5, 17], // 17 frames total, 5  frames spacing
+    [196.5, 18], // 18 frames total, 6  frames spacing
+    [205.5, 19], // 19 frames total, 7  frames spacing
+    [214.5, 20], // 20 frames total, 8  frames spacing
+    [223.5, 21], // 21 frames total, 9  frames spacing
+    [232.5, 22], // 22 frames total, 10 frames spacing
+    [241.5, 23], // 23 frames total, 11 frames spacing
 ];
 
 const rollDistancesAdultStandstill = [
-    [111.000, 12], // 12 frames total, 0  frames spacing
-    [111.000, 13], // 13 frames total, 1  frame  spacing
-    [130.500, 14], // 14 frames total, 2  frames spacing
-    [147.000, 15], // 15 frames total, 3  frames spacing
-    [160.500, 16], // 16 frames total, 4  frames spacing
-    [169.500, 17], // 17 frames total, 5  frames spacing
-    [178.500, 18], // 18 frames total, 6  frames spacing
-    [187.500, 19], // 19 frames total, 7  frames spacing
-    [196.500, 20], // 20 frames total, 8  frames spacing
-    [205.500, 21], // 21 frames total, 9  frames spacing
-    [214.500, 22], // 22 frames total, 10 frames spacing
-    [223.500, 23]  // 23 frames total, 11 frames spacing
+    [111.0, 12], // 12 frames total, 0  frames spacing
+    [111.0, 13], // 13 frames total, 1  frame  spacing
+    [130.5, 14], // 14 frames total, 2  frames spacing
+    [147.0, 15], // 15 frames total, 3  frames spacing
+    [160.5, 16], // 16 frames total, 4  frames spacing
+    [169.5, 17], // 17 frames total, 5  frames spacing
+    [178.5, 18], // 18 frames total, 6  frames spacing
+    [187.5, 19], // 19 frames total, 7  frames spacing
+    [196.5, 20], // 20 frames total, 8  frames spacing
+    [205.5, 21], // 21 frames total, 9  frames spacing
+    [214.5, 22], // 22 frames total, 10 frames spacing
+    [223.5, 23], // 23 frames total, 11 frames spacing
 ];
 
-let spacing             = 1;
-let rollStrokeWidth     = 2;
-let rollStrokeColor     = "#000000";
-let textStrokeWidth     = 2;
-let textStrokeColor     = "#ffffff";
-let textFillColor       = "#000000";
-let canvasFont          = "bold 12px arial, sans-serif";
-let canvasHeight        = 41;
-let canvasWidth         = 600;
+let spacing = 1;
+let rollStrokeWidth = 2;
+let rollStrokeColor = "#000000";
+let textStrokeWidth = 3;
+let textStrokeColor = "#000000";
+let textFillColor = "#ffffff";
+/* let textStrokeColor = "#ffffff";
+let textFillColor = "#000000"; */
+let canvasFont = "400 12px Arial";
+let canvasHeight = 41;
+let canvasWidth = 600;
 
 const manualColorsArray = [
     "#a32727", // 0  spacing, red
@@ -84,20 +86,21 @@ const manualColorsArray = [
 ];
 
 function drawRolls(rolls, context, canvas, stroke = false) {
+    context.font = canvasFont;
     context.lineWidth = rollStrokeWidth;
     context.strokeStyle = rollStrokeColor;
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.fillStyle = manualColorsArray[rolls[0]];
     let totalSpacing = rolls.reduce((a, b) => a + b, 0);
-    let rollFrames = (rolls.length * 12) + totalSpacing;
-    let pxPerFrame = (canvas.width - 16 - (spacing * (rolls.length-1))) / rollFrames;
-    let rollDrawnLength = (rolls[0]+12) * pxPerFrame;
+    let rollFrames = rolls.length * 12 + totalSpacing;
+    let pxPerFrame = (canvas.width - 16 - spacing * (rolls.length - 1)) / rollFrames;
+    let rollDrawnLength = (rolls[0] + 12) * pxPerFrame;
     if (stroke) {
-        context.strokeRect(7, 7, rollDrawnLength + 2 , 27);
-    };
+        context.strokeRect(7, 7, rollDrawnLength + 2, 27);
+    }
     context.fillRect(8, 8, rollDrawnLength, 25);
     let pushAlong = rollDrawnLength + spacing;
-    let textPos = (rollDrawnLength/2) + 3;
+    let textPos = rollDrawnLength / 2 + 3;
     context.lineWidth = textStrokeWidth;
     context.strokeStyle = textStrokeColor;
     context.strokeText(rolls[0], textPos, 25);
@@ -107,26 +110,25 @@ function drawRolls(rolls, context, canvas, stroke = false) {
         context.lineWidth = rollStrokeWidth;
         context.strokeStyle = rollStrokeColor;
         context.fillStyle = manualColorsArray[rolls[i]];
-        rollDrawnLength = (rolls[i]+12) * pxPerFrame;
+        rollDrawnLength = (rolls[i] + 12) * pxPerFrame;
         if (stroke) {
-            context.strokeRect(7 + pushAlong, 7, rollDrawnLength + 2 , 27);
-        };
+            context.strokeRect(7 + pushAlong, 7, rollDrawnLength + 2, 27);
+        }
         context.fillRect(8 + pushAlong, 8, rollDrawnLength, 25);
         pushAlong = pushAlong + rollDrawnLength + spacing;
-        textPos = (pushAlong-((rollDrawnLength/2))) + 5 - spacing;
+        textPos = pushAlong - rollDrawnLength / 2 + 5 - spacing;
         context.lineWidth = textStrokeWidth;
         context.strokeStyle = textStrokeColor;
         context.strokeText(rolls[i], textPos, 25);
         context.fillStyle = textFillColor;
         context.fillText(rolls[i], textPos, 25);
-    };
+    }
     canvas.classList.add("active");
-};
+}
 
 function getDistance(x1, z1, x2, z2) {
-    distance = Math.sqrt(((x1 - x2) ** 2) + ((z1 - z2) ** 2));
-    return distance;
-};
+    return Math.sqrt((x1 - x2) ** 2 + (z1 - z2) ** 2);
+}
 
 let unfilteredRollsResult = [];
 let comboArray = [];
@@ -138,48 +140,33 @@ let rollsLeniency = 0;
 let totalDistance = 0;
 
 function findRolls(rolls, standstillRolls, target, currentDistance, currentCombo, currentTime, startIndex, result, standstill) {
-    if ((currentDistance >= target) && (currentDistance < target + 132)) {
-        result.push([currentDistance, JSON.parse(JSON.stringify(currentCombo)), currentTime]);
+    if (currentDistance >= target && currentDistance < target + 132) {
+        result.push([currentDistance, [...currentCombo], currentTime]);
         if (currentTime < lowestTime) {
             lowestTime = currentTime;
-        };
+        }
         return;
-    };
+    }
     if (startIndex == rolls.length || currentCombo.length > Math.floor(target / rolls[0][0])) {
         currentCombo.pop();
         return;
-    };
+    }
     for (let i = startIndex; i < rolls.length; i++) {
-        newCombo = JSON.parse(JSON.stringify(currentCombo));
+        newCombo = [...currentCombo];
         newCombo.push(i);
         if (standstill == true) {
             if (newCombo.length <= 1) {
-                newDist = JSON.parse(JSON.stringify(distances));
+                newDist = [...distances];
                 newDist.push(standstillRolls[i][0]);
-                findRolls(
-                    rolls, standstillRolls, target,
-                    currentDistance + standstillRolls[i][0],
-                    newCombo, currentTime + rolls[i][1], i, result,
-                    standstill
-                );
+                findRolls(rolls, standstillRolls, target, currentDistance + standstillRolls[i][0], newCombo, currentTime + rolls[i][1], i, result, standstill);
             } else {
-                findRolls(
-                    rolls, standstillRolls, target,
-                    currentDistance + rolls[i][0],
-                    newCombo, currentTime + rolls[i][1], i, result,
-                    standstill
-                );
-            };
+                findRolls(rolls, standstillRolls, target, currentDistance + rolls[i][0], newCombo, currentTime + rolls[i][1], i, result, standstill);
+            }
         } else {
-            findRolls(
-                rolls, standstillRolls, target,
-                currentDistance + rolls[i][0],
-                newCombo, currentTime + rolls[i][1], i, result,
-                standstill
-            );
-        };
-    };
-};
+            findRolls(rolls, standstillRolls, target, currentDistance + rolls[i][0], newCombo, currentTime + rolls[i][1], i, result, standstill);
+        }
+    }
+}
 
 function resetArrays() {
     unfilteredRollsResult = [];
@@ -187,7 +174,7 @@ function resetArrays() {
     lowestTime = Infinity;
     pureFilteredCombos = [];
     filteredCombosData = [];
-};
+}
 
 function filterRolls(leniency, exclusive = false) {
     pureFilteredCombos = [];
@@ -195,281 +182,243 @@ function filterRolls(leniency, exclusive = false) {
     if (!exclusive) {
         for (let [i, combo] of unfilteredRollsResult.entries()) {
             if (combo[2] <= lowestTime + leniency) {
-                pureFilteredCombos.push(JSON.parse(JSON.stringify(unfilteredRollsResult[i][1])));
-                filteredCombosData.push(JSON.parse(JSON.stringify(unfilteredRollsResult[i])));
-            };
-        };
+                pureFilteredCombos.push(structuredClone(unfilteredRollsResult[i][1]));
+                filteredCombosData.push(structuredClone(unfilteredRollsResult[i]));
+            }
+        }
     } else {
         for (let [i, combo] of unfilteredRollsResult.entries()) {
             if (combo[2] == lowestTime + leniency) {
-                pureFilteredCombos.push(JSON.parse(JSON.stringify(unfilteredRollsResult[i][1])));
-                filteredCombosData.push(JSON.parse(JSON.stringify(unfilteredRollsResult[i])));
-            };
-        };
-    };
+                pureFilteredCombos.push(structuredClone(unfilteredRollsResult[i][1]));
+                filteredCombosData.push(structuredClone(unfilteredRollsResult[i]));
+            }
+        }
+    }
     pureFilteredCombos.reverse();
     filteredCombosData.reverse();
+}
+
+const visualizeRolls = (comboData, redOutline = false) => {
+    const container = document.createElement("div");
+    container.classList.add("rolls-container");
+
+    if (redOutline) {
+        container.classList.add("leniency-visualized");
+    }
+
+    const sum = comboData.reduce((acc, curr) => acc + curr + 12, 0);
+
+    for (const roll of comboData) {
+        const element = document.createElement("div");
+
+        element.className = "roll-element";
+        element.style.width = `${((roll + 12) / sum) * 100}%`;
+        element.style.backgroundColor = manualColorsArray[roll];
+
+        const inner = document.createElement("div");
+
+        inner.innerText = roll;
+
+        element.appendChild(inner);
+        container.appendChild(element);
+    }
+
+    return container;
 };
 
 function calculateRolls(x1, z1, x2, z2, fromStandstill, isAdult) {
     totalDistance = getDistance(x1, z1, x2, z2);
-    console.log(totalDistance);
     if (124.5 > totalDistance || totalDistance >= 1200) {
         setInputFields(false);
         if (totalDistance >= 1200) {
             backwalkPlease();
-        };
+        }
         return;
-    };
+    }
     setInputFields(true);
-    console.log(`Input coordinates: [${x1}, ${z1}] [${x2}, ${z2}]`)
+    console.log(`Input coordinates: [${x1}, ${z1}] [${x2}, ${z2}]`);
     let rolls = rollDistancesChild;
     let standstillRolls = rollDistancesChildStandstill;
     if (isAdult) {
         rolls = rollDistancesAdult;
         standstillRolls = rollDistancesAdultStandstill;
-    };
+    }
     resetArrays();
     let startTime = performance.now();
-    findRolls(
-        rolls           = rolls,
-        standstillRolls = standstillRolls,
-        target          = totalDistance,
-        currentDistance = 0,
-        currentCombo    = comboArray,
-        currentTime     = 0,
-        startIndex      = 0,
-        result          = unfilteredRollsResult,
-        standstill      = fromStandstill
-    );
+    findRolls(rolls, standstillRolls, totalDistance, 0, comboArray, 0, 0, unfilteredRollsResult, fromStandstill);
 
     filterRolls(rollsLeniency);
 
     let endTime = performance.now();
 
-    createCanvases(filteredCombosData);
+    createRollVisualizations(filteredCombosData);
 
     console.log("Roll combo data: ", filteredCombosData);
     console.log("All combos: ", pureFilteredCombos);
-    console.log(`Calculation took ${((endTime - startTime)/1000).toFixed(3)}s`)
-};
+    console.log(`Calculation took ${((endTime - startTime) / 1000).toFixed(3)}s`);
+}
 
 function validateInput() {
-    let x1          = document.getElementById("startX").value;
-    let z1          = document.getElementById("startZ").value;
-    let x2          = document.getElementById("endX").value;
-    let z2          = document.getElementById("endZ").value;
-    let isAdult     = (document.getElementById("age").value === "1");
-    let standstill  = document.querySelector('.standstill').checked;
+    let x1 = document.getElementById("startX").value;
+    let z1 = document.getElementById("startZ").value;
+    let x2 = document.getElementById("endX").value;
+    let z2 = document.getElementById("endZ").value;
+    let isAdult = document.getElementById("age").value === "1";
+    let standstill = document.querySelector(".standstill").checked;
 
-    let coords = [
-        x1,
-        z1,
-        x2,
-        z2
-    ];
-    let elements = [
-        document.getElementById("startX"),
-        document.getElementById("startZ"),
-        document.getElementById("endX"),
-        document.getElementById("endZ")
-    ];
+    let coords = [x1, z1, x2, z2];
+    let elements = [document.getElementById("startX"), document.getElementById("startZ"), document.getElementById("endX"), document.getElementById("endZ")];
     for (let [i, j] of coords.entries()) {
         if (j === "") {
             elements[i].value = "0";
-        };
-    };
+        }
+    }
 
     if (coords.includes(NaN)) {
         for (let [i, j] of coords.entries()) {
-            console.log(j)
             if (isNaN(j)) {
                 elements[i].classList.add("invalid-input");
-            };
-        };
+            }
+        }
     } else {
         calculateRolls(x1, z1, x2, z2, standstill, isAdult);
-    };
-};
+    }
+}
 
 function setInputFields(enabled = false) {
-    let elements = [
-        document.getElementById("startX"),
-        document.getElementById("startZ"),
-        document.getElementById("endX"),
-        document.getElementById("endZ")
-    ];
+    let elements = [document.getElementById("startX"), document.getElementById("startZ"), document.getElementById("endX"), document.getElementById("endZ")];
     for (let i of elements) {
         if (!enabled) {
             i.classList.add("invalid-input");
         } else {
             i.classList.remove("invalid-input");
-        };
-    };
-};
+        }
+    }
+}
 
-document.querySelector("body").addEventListener("keypress", function(e) {
+document.querySelector("body").addEventListener("keypress", function (e) {
     if (e.key === "Enter") {
         validateInput();
-    };
+    }
 });
 
-const root = document.querySelector(':root');
+const root = document.querySelector(":root");
 
 let indevInvis = true;
 let instructionsInvis = true;
 
-const delay = (delayInms) => {
-    return new Promise(resolve => setTimeout(resolve, delayInms));
+const delay = (delayInMs) => {
+    return new Promise((resolve) => setTimeout(resolve, delayInMs));
 };
 
-async function toggleIndev(calledByOther = false) {
+function toggleIndev(calledByOther = false) {
     classes = document.getElementById("coming").classList;
     indevInvis = !indevInvis;
     classes.toggle("display-none");
     displayNone(classes, indevInvis);
     if (!(instructionsInvis || calledByOther)) {
         toggleInstructions(true);
-    };
-};
+    }
+}
 
-async function toggleInstructions(calledByOther = false) {
+function toggleInstructions(calledByOther = false) {
     classes = document.getElementById("instructions").classList;
     instructionsInvis = !instructionsInvis;
     classes.toggle("display-none");
     displayNone(classes, instructionsInvis);
     if (!(indevInvis || calledByOther)) {
         toggleIndev(true);
-    };
-};
+    }
+}
 
-async function displayNone(classes, state) {
+function displayNone(classes, state) {
     if (state) {
         classes.add("display-none");
-    };
-};
+    }
+}
 
 function labelRolls(data, div, slower = false) {
-    div.innerHTML = `${data[0].toFixed(3)} units in ${data[2]} frames / ${(data[2]/20).toFixed(2)}s`
+    div.innerHTML = `${data[0].toFixed(3)} units in ${data[2]} frames / ${(data[2] / 20).toFixed(2)}s`;
     if (slower) {
-        div.innerHTML += " (+1 frame)"
-    };
-};
+        div.innerHTML += " (+1 frame)";
+    }
+}
 
 function backwalkPlease() {
     let container = document.getElementById("canvas-container");
     while (container.hasChildNodes()) {
         container.removeChild(container.firstChild);
-    };
-    container.appendChild(Object.assign(
-        document.createElement("iframe"), {id : "ytembed", width : "600", height: "338", src : "https://www.youtube.com/embed/IjmeBBHVnTc"}
-    ));
-};
+    }
+    container.appendChild(
+        Object.assign(document.createElement("iframe"), {
+            id: "ytembed",
+            width: "600",
+            height: "338",
+            src: "https://www.youtube.com/embed/IjmeBBHVnTc",
+        }),
+    );
+}
 
-function createCanvases(combos) {
-    let container = document.getElementById("canvas-container");
+function createRollVisualizations(combos) {
+    const container = document.getElementById("canvas-container");
     while (container.hasChildNodes()) {
         container.removeChild(container.firstChild);
-    };
-    container.appendChild(Object.assign(
-        document.createElement("div"), {id : "distancecontainer"}
-    ));
-    let distContainer = document.getElementById("distancecontainer");
-    distContainer.appendChild(Object.assign(
-        document.createElement("div"), {id : "distance"}
-    ));
-    document.getElementById("distance").innerText = `Distance to cover: ${totalDistance.toFixed(3)} units`
-    distContainer.appendChild(Object.assign(
-        document.createElement("button"), {id : "leniency", type : "button", onclick : toggleLeniency}
-    ));
+    }
+    container.appendChild(Object.assign(document.createElement("div"), { id: "distancecontainer" }));
+    const distContainer = document.getElementById("distancecontainer");
+    distContainer.appendChild(Object.assign(document.createElement("div"), { id: "distance" }));
+    document.getElementById("distance").innerText = `Distance to cover: ${totalDistance.toFixed(3)} units`;
+    distContainer.appendChild(
+        Object.assign(document.createElement("button"), {
+            id: "leniency",
+            type: "button",
+            onclick: toggleLeniency,
+        }),
+    );
     document.getElementById("leniency").innerText = "Add 1 frame of leniency";
     if (totalDistance >= 850) {
-        container.appendChild(Object.assign(
-            document.createElement("div"), {id : "backwalksmall"}
-        ));
+        container.appendChild(Object.assign(document.createElement("div"), { id: "backwalksmall" }));
         document.getElementById("backwalksmall").innerText = "(You should probably backwalk this distance lol)";
-    };
+    }
     if (rollsLeniency > 0) {
         for (let [i, value] of combos.entries()) {
             if (value[2] == lowestTime + rollsLeniency) {
-                container.appendChild(Object.assign(
-                    document.createElement("canvaslabel"), {id : `label-${i}`}
-                ));
-                container.appendChild(Object.assign(
-                    document.createElement("canvas"), {id : `canvas-${i}`, height : "41", width : canvasWidth.toString(), className : "leniency-visualized"}
-                ));
-                drawRolls(
-                    rolls   = value[1],
-                    context = document.getElementById(`canvas-${i}`).getContext("2d"),
-                    canvas  = document.getElementById(`canvas-${i}`),
-                    stroke  = true
-                );
-                labelRolls(
-                    data    = filteredCombosData[i],
-                    div     = document.getElementById(`label-${i}`),
-                    slower  = true
-                );
-            };
-        };
-        container.appendChild(Object.assign(
-            document.createElement("hr"), {id : "separator"}
-        ));
+                container.appendChild(Object.assign(document.createElement("canvaslabel"), { id: `label-${i}` }));
+                container.appendChild(visualizeRolls(value[1], true));
+                labelRolls(filteredCombosData[i], document.getElementById(`label-${i}`), true);
+            }
+        }
+        container.appendChild(Object.assign(document.createElement("hr"), { id: "separator" }));
         for (let [i, value] of combos.entries()) {
             if (value[2] == lowestTime) {
-                container.appendChild(Object.assign(
-                    document.createElement("canvaslabel"), {id : `label-${i+99}`}
-                ));
-                container.appendChild(Object.assign(
-                    document.createElement("canvas"), { id : `canvas-${i+99}`, height : "41", width : canvasWidth.toString()}
-                ));
-                drawRolls(
-                    rolls   = value[1],
-                    context = document.getElementById(`canvas-${i+99}`).getContext("2d"),
-                    canvas  = document.getElementById(`canvas-${i+99}`),
-                    stroke  = true
-                );
-                labelRolls(
-                    data    = filteredCombosData[i],
-                    div     = document.getElementById(`label-${i+99}`)
-                );
-            };
-        };
+                container.appendChild(Object.assign(document.createElement("canvaslabel"), { id: `label-${i + 99}` }));
+                container.appendChild(container.appendChild(visualizeRolls(value[1], false)));
+                labelRolls((data = filteredCombosData[i]), (div = document.getElementById(`label-${i + 99}`)));
+            }
+        }
     } else {
         for (let [i, value] of combos.entries()) {
-            container.appendChild(Object.assign(
-                document.createElement("canvaslabel"), {id : `label-${i}`}
-            ));
-            container.appendChild(Object.assign(
-                document.createElement("canvas"), { id : `canvas-${i}`, height : "41", width : canvasWidth.toString()}
-            ));
-            drawRolls(
-                rolls   = value[1],
-                context = document.getElementById(`canvas-${i}`).getContext("2d"),
-                canvas  = document.getElementById(`canvas-${i}`),
-                stroke  = true
-            );
-            labelRolls(
-                data    = filteredCombosData[i],
-                div     = document.getElementById(`label-${i}`)
-            );
-        };
-    };
-};
+            container.appendChild(Object.assign(document.createElement("canvaslabel"), { id: `label-${i}` }));
+            container.appendChild(visualizeRolls(value[1], false));
+            labelRolls((data = filteredCombosData[i]), (div = document.getElementById(`label-${i}`)));
+        }
+    }
+}
 
 function unrestrictInput(field) {
-    field.classList.remove("invalid-input")
-};
+    field.classList.remove("invalid-input");
+}
 
-async function toggleLeniency() {
+function toggleLeniency() {
     if (rollsLeniency == 0) {
         rollsLeniency = 1;
     } else {
         rollsLeniency = 0;
-    };
+    }
     filterRolls(rollsLeniency, false);
-    createCanvases(filteredCombosData);
+    createRollVisualizations(filteredCombosData);
     toggleLeniencyClass();
-};
+}
 
 function toggleLeniencyClass() {
     let element = document.getElementById("leniency");
@@ -478,28 +427,28 @@ function toggleLeniencyClass() {
         element.innerText = "Remove 1 frame of leniency";
     } else {
         element.classList.remove("on");
-    };
-};
+    }
+}
 
 function scaleElements() {
     let root = document.querySelector(":root");
-    if (window.innerWidth < 640){
+    if (window.innerWidth < 640) {
         if (lowestTime < 999) {
-            canvasWidth = window.innerWidth-40;
-            createCanvases(filteredCombosData);
-        };
-        root.style.setProperty("--canvas-width", `${window.innerWidth-40}px`);
-        root.style.setProperty("--overlay-width", `${window.innerWidth-44}px`);
-        root.style.setProperty("--button-container-margin", `${116 - ((640 - window.innerWidth) / 2)}px`);
+            canvasWidth = window.innerWidth - 40;
+            createRollVisualizations(filteredCombosData);
+        }
+        root.style.setProperty("--canvas-width", `${window.innerWidth - 40}px`);
+        root.style.setProperty("--overlay-width", `${window.innerWidth - 44}px`);
+        root.style.setProperty("--button-container-margin", `${116 - (640 - window.innerWidth) / 2}px`);
     } else {
         root.style.setProperty("--canvas-width", "600px");
         root.style.setProperty("--overlay-width", "588px");
         root.style.setProperty("--button-container-margin", "116px");
         canvasWidth = 600;
-    };
-};
+    }
+}
 
-window.addEventListener('resize', function() {
+window.addEventListener("resize", function () {
     scaleElements();
 });
 
@@ -507,7 +456,7 @@ window.addEventListener("load", (event) => {
     scaleElements();
 });
 
-/* 
+/*
 TODO LIST
 
 Metronome
